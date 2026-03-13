@@ -19,8 +19,10 @@ from analysis.insight_generator import generate_insights
 from analysis.categorical_normalizer import normalize_categorical_columns
 from analysis.predictive_modeler import train_predictive_model
 from analysis.business_advisor import detect_domain, generate_kpis, interpret_trends, generate_recommendations, generate_executive_summary, get_analyzer_for_domain
+from analysis.llm_service import OllamaService
 
 app = FastAPI(title="DataSense-AI Analytical Engine")
+llm = OllamaService()
 
 app.add_middleware(
     CORSMiddleware,
@@ -125,7 +127,20 @@ async def analyze_dataset(file: UploadFile = File(...)):
         # ═══════════════════════════════════════════════════════
         # Domain Detection & Analyzer Instantiation
         # ═══════════════════════════════════════════════════════
+        # Start with rule-based fallback
         domain_info = detect_domain(schema)
+        
+        # Override with AI Semantic Detection if available
+        semantic_domain = llm.detect_semantic_domain(
+            column_names=list(cleaned_df.columns),
+            sample_data=cleaned_df.head(5).to_dict(orient="records")
+        )
+        
+        if semantic_domain:
+            domain_info["domain"] = semantic_domain["domain"]
+            domain_info["source"] = semantic_domain["source"]
+            domain_info["confidence"] = "Verified by AI"
+            
         analyzer = get_analyzer_for_domain(domain_info["domain"])
         
         # ═══════════════════════════════════════════════════════
@@ -166,9 +181,21 @@ async def analyze_dataset(file: UploadFile = File(...)):
         )
         
         # ═══════════════════════════════════════════════════════
-        # STEP 11 — ML Simulation Layer
+        # STEP 11 — ML Simulation Layer (Moved up for LLM Synthesis)
         # ═══════════════════════════════════════════════════════
         prediction_results = train_predictive_model(engineered_df, schema)
+        
+        # 🔗 Phase 17: Smart LLM Insight (Synthesize Stats + Predictions)
+        smart_summary = llm.generate_insight(
+            context_data={
+                "rows": len(cleaned_df),
+                "insights": insights,
+                "kpis": kpis,
+                "predictions": prediction_results,
+                "sample": cleaned_df.head(5).to_dict(orient="records")
+            },
+            domain=domain_info["domain"]
+        )
         
         # ═══════════════════════════════════════════════════════
         # STEP 13 — Final Structured Output
@@ -192,7 +219,8 @@ async def analyze_dataset(file: UploadFile = File(...)):
                 "kpis": kpis,
                 "trend_analysis": trend_analysis,
                 "recommendations": business_recs,
-                "executive_summary": executive_summary
+                "executive_summary": executive_summary,
+                "smart_summary": smart_summary
             }
         })
         

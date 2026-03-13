@@ -541,7 +541,7 @@ export default function ResultsDashboard({ data, onBack }) {
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div>
                         <h1 className="text-3xl font-bold text-white tracking-tight">DataSense Overview</h1>
-                        <p className="text-app-textMuted mt-1 text-sm font-medium italic">Confidence: {data.business_advisor.domain.confidence} • Domain: {data.business_advisor.domain.domain}</p>
+                        <p className="text-app-textMuted mt-1 text-sm font-medium italic">Domain: {data.business_advisor.domain.domain}</p>
                     </div>
                     <div className="flex items-center gap-4">
                         <Tabs 
@@ -640,10 +640,15 @@ export default function ResultsDashboard({ data, onBack }) {
                                 <div className="p-6 rounded-3xl border border-white/5 bg-white/5 backdrop-blur-sm relative overflow-hidden group/narrative">
                                     <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none" />
                                     <p className="text-[10px] text-app-textMuted font-bold uppercase tracking-widest mb-3 flex items-center gap-2 relative z-10">
-                                        <TrendingUp className="w-3.5 h-3.5" style={{ color: domainConfig.accent }} /> Analysis Narrative
+                                        <TrendingUp className="w-3.5 h-3.5" style={{ color: domainConfig.accent }} /> 
+                                        {data.business_advisor.smart_summary ? (
+                                            <span className="flex items-center gap-1.5 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 px-2 py-0.5 rounded-full border border-indigo-500/30">
+                                                <Zap className="w-3 h-3 animate-pulse" /> AI Synthesis Engine
+                                            </span>
+                                        ) : "Analysis Narrative"}
                                     </p>
-                                    <p className="text-sm text-app-text leading-relaxed italic font-medium relative z-10">
-                                        "{data.business_advisor.trend_analysis || data.business_advisor.executive_summary}"
+                                    <p className="text-sm text-app-text leading-relaxed italic font-medium relative z-10 line-clamp-4">
+                                        "{data.business_advisor.smart_summary || data.business_advisor.trend_analysis || data.business_advisor.executive_summary}"
                                     </p>
                                 </div>
                             </div>
@@ -754,12 +759,41 @@ export default function ResultsDashboard({ data, onBack }) {
                         </div>
                         <h4 className="text-xl font-black mb-4 tracking-tight">Predictive Intelligence</h4>
                         <p className="text-blue-100 text-sm leading-relaxed mb-6 font-medium">
-                            Our AI model has analyzed {data.summary.rows} rows and predicts potential outcomes for <b>{data.prediction_results?.target}</b>.
+                            {(() => {
+                                const summary = data.business_advisor.smart_summary || "";
+                                const predictiveMatch = summary.match(/PREDICTIVE SYNTHESIS:(.*?)(?=3\.|\n\n|$)/s);
+                                
+                                // Robust Humanizer for target names
+                                const rawTarget = data.prediction_results?.target || 'target metrics';
+                                const cleanTarget = rawTarget
+                                    .replace(/_/g, ' ')
+                                    .replace(/([A-Z])/g, ' $1')
+                                    .replace(/\s+/g, ' ')
+                                    .trim()
+                                    .split(' ')
+                                    .map(w => w.length > 1 ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase() : w.toUpperCase())
+                                    .join(' ')
+                                    .replace(/^Attnr$/i, 'Attrition')
+                                    .replace(/^Def$/i, 'Default')
+                                    .replace(/^Self D$/i, 'Self Direction');
+
+                                return predictiveMatch 
+                                    ? predictiveMatch[1].trim() 
+                                    : `The intelligence engine identifies ${cleanTarget} as the primary optimization focus based on current momentum.`;
+                            })()}
                         </p>
                         <div className="flex items-center gap-4">
-                            <div className="bg-white/20 backdrop-blur-md rounded-2xl px-4 py-2">
-                                <p className="text-[10px] font-black uppercase text-blue-200">Confidence</p>
-                                <p className="text-lg font-black">{((data.prediction_results?.performance?.r2 || 0.85) * 100).toFixed(1)}%</p>
+                            <div className={`bg-white/20 backdrop-blur-md rounded-2xl px-4 py-2 ${((data.prediction_results?.performance?.r2 || 0) >= 0.999) ? 'border border-red-400/50' : ''}`}>
+                                <p className="text-[10px] font-black uppercase text-blue-200">
+                                    {((data.prediction_results?.performance?.r2 || 0) >= 0.999) ? '⚠️ Potential Bias' : 'System Accuracy'}
+                                </p>
+                                {((data.prediction_results?.performance?.r2 || 0) < 0.999) ? (
+                                    <p className="text-lg font-black">{((data.prediction_results?.performance?.r2 || 0.85) * 100).toFixed(1)}%</p>
+                                ) : (
+                                    <p className="text-[10px] text-red-200 mt-1 font-medium leading-tight max-w-[120px]">
+                                        Model might be influenced by data leakage or constant drivers.
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>
@@ -861,6 +895,88 @@ export default function ResultsDashboard({ data, onBack }) {
                 )}
             </div>
         )}
+
+                {/* AI Synthesis Engine (Full Strategic Analysis) - Selective Global Placement */}
+                {activeView === 'insights' && (data.business_advisor.smart_summary || data.business_advisor.trend_analysis) && (
+                    <div className="mt-16 bg-gradient-to-br from-app-bg to-[#1a1b2e] rounded-[3rem] p-12 border border-white/10 shadow-2xl relative overflow-hidden group/synthesis animate-in fade-in slide-in-from-bottom-12 duration-1000">
+                        {/* High-End Background Effects */}
+                        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/5 blur-[120px] rounded-full -mr-48 -mt-48 transition-all duration-1000 group-hover/synthesis:bg-indigo-500/10" />
+                        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-500/5 blur-[100px] rounded-full -ml-32 -mb-32 transition-all duration-1000 group-hover/synthesis:bg-purple-500/10" />
+                        
+                        <div className="relative z-10">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+                                <div>
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <div className="p-2.5 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 shadow-inner">
+                                            <Zap className="w-6 h-6 text-indigo-400 animate-pulse" />
+                                        </div>
+                                        <span className="bg-indigo-500/10 text-indigo-300 text-[10px] font-black uppercase tracking-[0.3em] px-5 py-2 rounded-full border border-indigo-500/20 backdrop-blur-md">
+                                            AI Synthesis Engine
+                                        </span>
+                                    </div>
+                                    <h2 className="text-4xl font-black text-white tracking-tight">Full Strategic Analysis</h2>
+                                    <p className="text-app-textMuted mt-2 font-medium max-w-xl">Deep structural synthesis derived from dataset variance, distribution laws, and predictive foresight.</p>
+                                </div>
+                                <div className="hidden md:flex items-center gap-4 p-2 bg-white/5 rounded-2xl border border-white/10 backdrop-blur-sm">
+                                    <div className="px-4 py-2 border-r border-white/10 text-center">
+                                        <p className="text-[10px] font-black text-app-textMuted uppercase tracking-wider mb-1">Logic Depth</p>
+                                        <p className="text-sm font-bold text-white">Elite</p>
+                                    </div>
+                                    <div className="px-4 py-2 text-center">
+                                        <p className="text-[10px] font-black text-app-textMuted uppercase tracking-wider mb-1">Intelligence</p>
+                                        <p className="text-sm font-bold text-white">Zero-Shot</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                                {(() => {
+                                    const rawSummary = data.business_advisor.smart_summary || data.business_advisor.trend_analysis || "";
+                                    
+                                    // Parse segments based on common headers
+                                    const segments = [
+                                        { title: "Core Narrative", key: /1\.\s+THE\s+CORE\s+NARRATIVE|###\s+THE\s+CORE\s+NARRATIVE/i },
+                                        { title: "Predictive Synthesis", key: /2\.\s+PREDICTIVE\s+SYNTHESIS|###\s+PREDICTIVE\s+SYNTHESIS/i },
+                                        { title: "Strategic 'So What?'", key: /3\.\s+THE\s+STRATEGIC\s+'SO\s+WHAT\?'|###\s+THE\s+STRATEGIC\s+'SO\s+WHAT\?'/i },
+                                        { title: "Actionable Foresight", key: /4\.\s+ACTIONABLE\s+FORESIGHT|###\s+ACTIONABLE\s+FORESIGHT/i }
+                                    ];
+
+                                    return segments.map((seg, idx) => {
+                                        // Simple regex-based extraction
+                                        let text = "Analyzing data patterns...";
+                                        const part = rawSummary.split(seg.key);
+                                        if (part.length > 1) {
+                                            // Take content after the header and stop at the next segment or end
+                                            text = part[1].split(/###?\s+|[0-9]\.\s+/)[0].trim();
+                                        } else if (idx === 0 && !rawSummary.includes("###")) {
+                                            // Fallback for non-segmented summaries
+                                            text = rawSummary;
+                                        }
+
+                                        if (idx === 0 && text === "Analyzing data patterns..." && !rawSummary.includes("###")) return null;
+
+                                        return (
+                                            <div key={idx} className="group/segment p-8 rounded-[2.5rem] bg-white/[0.03] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all duration-500 relative overflow-hidden">
+                                                <div className="absolute top-0 right-0 w-32 h-32 bg-white/[0.02] rounded-full blur-2xl -mr-16 -mt-16 group-hover/segment:bg-white/[0.05] transition-all" />
+                                                <div className="flex items-center gap-4 mb-6">
+                                                    <div className="w-10 h-10 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-black text-lg group-hover/segment:scale-110 transition-transform">
+                                                        {idx + 1}
+                                                    </div>
+                                                    <h4 className="text-xl font-black text-white tracking-tight">{seg.title}</h4>
+                                                </div>
+                                                <div className="relative z-10">
+                                                    <p className="text-app-textMuted text-base leading-relaxed font-normal whitespace-pre-wrap">
+                                                        {text}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        );
+                                    });
+                                })()}
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 {/* Geographic Intelligence Section (Universal Bottom Placement) */}
                 {geoChart && (filterType === 'all' || filterType === 'geo_map') && (

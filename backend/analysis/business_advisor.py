@@ -68,27 +68,60 @@ def interpret_trends(domain, schema, stats):
 
 def generate_recommendations(domain, insights):
     """
-    Step 5: Business Recommendations
+    Step 5: Business Recommendations (Enhanced)
     """
     recommendations = []
     
-    # Add based on insights
+    # ── Grouping Outliers for Impact ──
+    outlier_cols = [i["column"] for i in insights if i["type"] == "outlier"]
+    if len(outlier_cols) > 2:
+        recommendations.append(f"High Variance Alert: Detected significant anomalies in {', '.join(outlier_cols[:3])}. Recommend immediate data quality review or strategic audit.")
+    elif outlier_cols:
+        for col in outlier_cols:
+            recommendations.append(f"Investigate volatility markers in {col} to preserve operational margin.")
+    
+    # ── Intelligent Correlation-based Recommendations ──
     for insight in insights:
         if insight["type"] == "correlation":
-            recommendations.append(f"Optimize {insight['columns'][0]} to drive performance in {insight['columns'][1]}.")
-        elif insight["type"] == "outlier":
-            recommendations.append(f"Investigate extreme cases in {insight['column']} to prevent resource leakage.")
+            col1, col2 = insight["columns"]
+            recommendations.append(f"Strategic Leverage: The synergy between {col1} and {col2} suggests a prime opportunity for multi-factor optimization.")
             
-    # Add based on domain
+    # ── Domain-Specific Strategic Advice ──
     domain_recs = {
-        "Retail / E-commerce": ["Increase inventory for high-demand products", "Focus marketing on top-performing categories"],
-        "Marketing": ["Increase budget for high ROI campaigns", "Optimize underperforming channels"],
-        "Finance / Banking": ["Strengthen risk assessment for outlier transactions", "Diversify portfolio based on uncorrelated metrics"]
+        "Retail / E-commerce": [
+            "Synchronize inventory cycles with high-velocity product categories.",
+            "Deploy localized marketing campaigns for under-penetrated demographics.",
+            "Review discount elasticity to boost full-price sell-through rates."
+        ],
+        "Marketing": [
+            "Reallocate budget to high-ROI channels identified in the latest cycle.",
+            "A/B test creative assets in segments with high engagement variance.",
+            "Optimize conversion funnels for mobile-first user journeys."
+        ],
+        "Human Resources": [
+            "Review employee retention drivers in high-performance departments.",
+            "Benchmark compensation packages against industry output standards.",
+            "Analyze department-specific workload distribution for efficiency gains."
+        ],
+        "Finance / Banking": [
+            "Enhance credit-risk modeling based on non-linear spending patterns.",
+            "Detect early-warning signals for liquidity shifts in primary accounts.",
+            "Diversify asset classes based on detected market volatility clusters."
+        ]
     }
     
-    recommendations.extend(domain_recs.get(domain["domain"], ["Standardize data entry to reduce variance", "Explore segment-specific strategies"]))
+    defaults = [
+        "Consolidate fragmented data sources to improve analytical precision.",
+        "Evaluate strategic shift toward high-margin business segments.",
+        "Refine operational KPI thresholds based on historical variance."
+    ]
     
-    return recommendations[:5]
+    recommendations.extend(domain_recs.get(domain["domain"], defaults))
+    
+    # 🗜️ Deduplicate and Cap
+    seen = set()
+    unique_recs = [x for x in recommendations if not (x in seen or seen.add(x))]
+    return unique_recs[:5]
 
 def generate_executive_summary(domain, summary, insights):
     """

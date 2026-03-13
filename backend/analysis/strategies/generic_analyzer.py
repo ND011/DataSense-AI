@@ -52,15 +52,26 @@ class GenericAnalyzer(BaseAnalyzer):
 
     def interpret_specific_trends(self, schema: Dict[str, Any], stats: Dict[str, Any]) -> str:
         num_cols = len(schema.get("numeric_columns", []))
+        volatile_cols = [k for k, v in stats.get("numeric_stats", {}).items() if v.get("std", 0) > v.get("mean", 1)]
         
         prompt = (
             f"I have profiled a dataset with {num_cols} numerical columns. "
-            f"Write a 3 sentence business analyst summary explaining how outlier detection across these "
-            f"numerical metrics can signal operational shifts or data quality issues."
+            f"Significant variance was detected in: {', '.join(volatile_cols[:3])}. "
+            f"Analyze these signals using 'Structural First Principles'. Identify the most likely 'Vital Few' "
+            f"drivers and provide a 3-sentence executive hypothesis on how this variance impacts structural stability. "
+            f"Reference the specific columns {volatile_cols[:3]} in your logical synthesis."
         )
         
         llm = OllamaService("llama3.2")
-        return llm.generate_insight(prompt, system_persona="Act as a Strategic Data Consultant.")
+        return llm.generate_insight(
+            context_data={
+                "insights": [{"type": "variance", "columns": volatile_cols}],
+                "predictions": {"target": volatile_cols[0] if volatile_cols else "Core Metrics"}
+            },
+            domain="General Business",
+            prompt_override=prompt,
+            system_persona="Act as an Elite Zero-Shot Strategic Consultant specializing in structural data analysis."
+        )
 
     def recommend_domain_charts(self, schema: Dict[str, Any], stats: Dict[str, Any]) -> List[Dict[str, Any]]:
         return [] # Generic uses standard statistical recommender

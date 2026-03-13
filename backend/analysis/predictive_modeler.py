@@ -39,13 +39,24 @@ def train_predictive_model(df, schema):
     target_col = None
     is_classification = False
     
-    # Priority 1: Binary column → classification
-    if binary_cols:
-        target_col = binary_cols[-1]  # last binary column as target
+    # Filter candidates by variance to avoid constant columns (like StandardHours)
+    def has_variance(c):
+        s = df[c].dropna()
+        return len(s.unique()) > 1 if c in binary_cols else s.std() > 1e-6
+
+    valid_binary = [c for c in binary_cols if has_variance(c)]
+    valid_numeric = [c for c in numeric_cols if has_variance(c)]
+    
+    # Priority 1: Valid Binary column → classification
+    if valid_binary:
+        target_col = valid_binary[-1]
         is_classification = True
-    else:
-        # Priority 2: Last numeric column → regression
-        target_col = numeric_cols[-1]
+    elif valid_numeric:
+        # Priority 2: Valid Numeric column → regression
+        target_col = valid_numeric[-1]
+    
+    if not target_col:
+        return None
     
     # Prepare features: all other numeric columns (excluding target)
     feature_cols = [c for c in numeric_cols if c != target_col]

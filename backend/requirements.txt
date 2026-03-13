@@ -1,3 +1,5 @@
+# DataSense-AI Analytical Engine Requirements
+requests
 fastapi
 uvicorn
 pandas
