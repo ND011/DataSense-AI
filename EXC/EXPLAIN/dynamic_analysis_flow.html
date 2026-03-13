@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Multi-Domain Analysis Flow</title>
+    <!-- Include Mermaid.js for rendering the flow diagram -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.0/dist/mermaid.min.js"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: true,
+        theme: "dark",
+        flowchart: { useMaxWidth: false, htmlLabels: true },
+      });
+    </script>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+        line-height: 1.6;
+        padding: 40px;
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #bfdbfe;
+      }
+      .mermaid-container {
+        background-color: #1e293b;
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 40px;
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        display: flex;
+        justify-content: center;
+      }
+      .content-section {
+        margin-bottom: 30px;
+      }
+      code {
+        background-color: #334155;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+      hr {
+        border: 0;
+        height: 1px;
+        background-color: #334155;
+        margin: 40px 0;
+      }
+      ul,
+      ol {
+        margin-top: 10px;
+      }
+      li {
+        margin-bottom: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Dynamic Multi-Domain Analysis Flow</h1>
+    <p>
+      From the perspective of a seasoned Data Analyst, working with unknown data
+      requires a system that doesn't just run static operations, but dynamically
+      adapts its approach based on the "Domain Context" (e.g., Finance,
+      Healthcare, E-commerce, Weather).
+    </p>
+
+    <p>
+      To achieve a true
+      <strong>Dynamic, Adaptable, and Multi-use</strong> analytical engine, the
+      flow must mimic human analytical reasoning:
+    </p>
+    <ol>
+      <li><strong>Observe</strong> (Profile the raw shapes)</li>
+      <li><strong>Contextualize</strong> (Determine the domain)</li>
+      <li>
+        <strong>Adapt</strong> (Choose the right analytical tools for the
+        context)
+      </li>
+      <li>
+        <strong>Synthesize</strong> (Generate insights that speak the domain's
+        language)
+      </li>
+    </ol>
+
+    <hr />
+
+    <h2>The Dynamic Analysis Flow Architecture</h2>
+
+    <!-- Mermaid Diagram -->
+    <div class="mermaid-container">
+      <div class="mermaid">
+        graph TD classDef primary
+        fill:#1e293b,stroke:#3b82f6,stroke-width:2px,color:#f8fafc; classDef
+        secondary fill:#0f172a,stroke:#64748b,stroke-width:1px,color:#cbd5e1;
+        classDef accent
+        fill:#3b82f6,stroke:#bfdbfe,stroke-width:2px,color:#ffffff; A[Raw
+        Dataset Uploaded] --> B(Phase 1: Agnostic Data Profiling) B --> C{Phase
+        2: Semantic Domain Detection} C -->|Keywords / Data Signatures|
+        D1[Finance / Sales] C -->|Geo / Time Signatures| D2[Logistics / Weather]
+        C -->|Entity Relationships| D3[HR / E-commerce] C -->|No clear
+        signature| D4[Generic Statistical] D1 -.-> E D2 -.-> E D3 -.-> E D4 -.->
+        E E((Phase 3: Adaptive Engine Calibration)) E --> F1[Descriptive: Target
+        Analysis] E --> F2[Diagnostic: Correlation & Anomalies] E -->
+        F3[Predictive: AutoML Models] F1 --> G F2 --> G F3 --> G G(Phase 4:
+        Contextual Insight Generation) --> H[Domain-Specific Dashboard] class
+        A,B,E,G primary; class C,F1,F2,F3 secondary; class H accent;
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Phase 1: Agnostic Data Profiling (The "First Glance")</h2>
+      <p>
+        Before we know <em>what</em> the data is about, we need to know its
+        <em>physical</em> characteristics. This phase treats all data equally.
+      </p>
+      <ul>
+        <li>
+          <strong>Type Inference:</strong> Are columns numerical, categorical,
+          temporal, or spatial?
+        </li>
+        <li>
+          <strong>Sparsity & Quality:</strong> Are there nulls? Are there
+          extreme outliers indicating bad data collection?
+        </li>
+        <li>
+          <strong>Cardinality:</strong> Does a column have many unique values
+          (like IDs) or few (like categories)?
+        </li>
+      </ul>
+      <p>
+        <strong>Why it's adaptable:</strong> This phase never breaks, regardless
+        of the data topic, ensuring the system can ingest anything.
+      </p>
+    </div>
+
+    <div class="content-section">
+      <h2>Phase 2: Semantic Domain Detection (The "Contextualizer")</h2>
+      <p>
+        This is where the system becomes "smart". A good analyst looks at column
+        headers and data samples and immediately knows:
+        <em>"Ah, 'Close_Price' and 'Volume' means this is Stock data."</em>
+      </p>
+      <ul>
+        <li>
+          <strong>Heuristic Matching:</strong> Scanning columns for keywords
+          (<code>revenue</code>, <code>patient_id</code>,
+          <code>temperature_c</code>).
+        </li>
+        <li>
+          <strong>Signature Recognition:</strong> Recognizing that a dataset
+          with <code>Latitude</code>, <code>Longitude</code>, and a
+          <code>Timestamp</code> is inherently Geospatial/Mobility data.
+        </li>
+        <li>
+          <strong>Domain Ontology:</strong> Mapping detected keywords to
+          predefined domain categories (Finance, HR, Healthcare, E-commerce,
+          Weather, Generic).
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Phase 3: Adaptive Engine Calibration (The "Multi-use Core")</h2>
+      <p>
+        Once the domain is known, the system <strong>adapts</strong> its
+        statistical approach. An analyst doesn't treat stock prices (time-series
+        volatility) the same way they treat a customer satisfaction survey
+        (categorical distribution).
+      </p>
+
+      <h3>Dynamic Logic Pathways:</h3>
+      <ul>
+        <li>
+          <strong>If Domain == Finance / Time-Series:</strong>
+          <ul>
+            <li>
+              <em>Focus on:</em> Trends over time, Moving Averages, Volatility
+              (Standard Deviation), Seasonality.
+            </li>
+            <li>
+              <em>Target Variable logic:</em> Automatically look for the column
+              representing "Money" or "Price".
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>If Domain == E-Commerce / Consumer:</strong>
+          <ul>
+            <li>
+              <em>Focus on:</em> Segmentation, Pareto Analysis (80/20 rule),
+              Churn probability, Basket Analysis.
+            </li>
+            <li>
+              <em>Target Variable logic:</em> Look for "Conversion", "Sales", or
+              "Retention".
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>If Domain == Generic (Unknown):</strong>
+          <ul>
+            <li>
+              Fall back to robust, agnostic statistics (Distribution shapes,
+              basic correlation matrices, PCA for dimensionality reduction).
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Phase 4: Contextual Insight Generation (The "Storyteller")</h2>
+      <p>
+        Data is useless without translation. A generic system says:
+        <em>"Variable X increased by 40% while Y decreased by 12%."</em> A
+        <strong>Domain-Adapted</strong> system uses an LLM (Large Language
+        Model) overlay to speak the user's language.
+      </p>
+      <ul>
+        <li>
+          <strong>Dynamic Prompting:</strong> The system passes the raw
+          statistics <em>and</em> the detected Domain to the AI.
+          <ul>
+            <li>
+              <em>Finance Prompt:</em> "Act as a CFO. Explain these variance
+              metrics..."
+            </li>
+            <li>
+              <em>HR Prompt:</em> "Act as an HR Director. Explain these
+              attrition correlations..."
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Resulting Output:</strong>
+          <ul>
+            <li>
+              <em
+                >"We observed a 40% surge in Customer Acquisition Cost (Variable
+                X), directly driving down Net Retention (Variable Y) by
+                12%."</em
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>How to Implement this in Code (The Analyst's Playbook)</h2>
+      <p>
+        To build this practically, your software architecture should use a
+        <strong>Strategy Pattern</strong>:
+      </p>
+      <ol>
+        <li>
+          <strong>A Base <code>Analyzer</code> Class:</strong> Handles parsing,
+          cleaning, and basic math.
+        </li>
+        <li>
+          <strong>Domain Strategies:</strong> Classes like
+          <code>FinanceAnalyzer</code>, <code>HealthcareAnalyzer</code> that
+          inherit from the Base Class but override specific methods (e.g.,
+          overriding <code>select_target_variable()</code> to hunt for dollar
+          amounts).
+        </li>
+        <li>
+          <strong>The Orchestrator:</strong> A central controller that runs
+          Phase 1 & 2, instantiates the correct specific Analyzer, and pipelines
+          the output to the UI.
+        </li>
+      </ol>
+    </div>
+  </body>
+</html>
