@@ -50,24 +50,33 @@ def detect_column_types(df):
 
         if is_geo:
             schema["geographic_columns"].append(col)
+            continue
         
-        # ── 1. Identifier Detection (User Rules — Step 1) ──
+        # ── 1. Identifier Detection ──
         is_identifier = False
+        col_lower = str(col).lower().strip()
+        metric_keywords = ['orders', 'amount', 'salary', 'price', 'score', 'value', 'total', 'count', 'quantity', 'revenue', 'profit', 'sales']
         
-        # Rule 1: Keyword Check
-        if any(kw == col_lower or f"_{kw}" in col_lower or f"{kw}_" in col_lower or col_lower.endswith(kw) for kw in id_keywords):
-            is_identifier = True
-            
-        # Rule 2: High Uniqueness Ratio (> 0.95)
-        if not is_identifier and unique_ratio > 0.95 and not pd.api.types.is_float_dtype(df[col]):
-            if n_rows > 5:
+        # PROTECTION: If it looks like a metric or is numeric and float, it's NOT an ID
+        is_protected_metric = any(mk in col_lower for mk in metric_keywords)
+        
+        if not is_protected_metric:
+            # Rule 1: Keyword Check (e.g., customer_id, emp_code)
+            if any(kw == col_lower or f"_{kw}" in col_lower or f"{kw}_" in col_lower or col_lower.endswith(kw) for kw in id_keywords):
                 is_identifier = True
                 
-        # Rule 3: Monotonically Increasing Integers (1, 2, 3...)
-        if not is_identifier and pd.api.types.is_integer_dtype(df[col]) and n_rows > 2:
-            s = df[col].dropna()
-            if not s.empty and s.is_monotonic_increasing and (s.iloc[-1] - s.iloc[0] == len(s) - 1):
-                is_identifier = True
+            # Rule 2: High Uniqueness Ratio (> 0.99 for larger datasets)
+            if not is_identifier and unique_ratio > 0.99 and not pd.api.types.is_float_dtype(df[col]):
+                if n_rows > 30: # Only for larger datasets where high uniqueness is suspicious
+                    is_identifier = True
+                    
+            # Rule 3: Monotonically Increasing Integers (Primary Key behavior: 1, 2, 3...)
+            if not is_identifier and pd.api.types.is_integer_dtype(df[col]) and n_rows > 5:
+                s = df[col].dropna()
+                if not s.empty and s.is_monotonic_increasing and (s.iloc[-1] - s.iloc[0] == len(s) - 1):
+                    # One last check: if it's named 'Year' or 'Date', it shouldn't be an ID
+                    if not any(dk in col_lower for dk in ['year', 'date', 'time']):
+                        is_identifier = True
             
         if is_identifier:
             schema["identifier_columns"].append(col)
