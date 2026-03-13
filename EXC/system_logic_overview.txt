@@ -1,0 +1,122 @@
+================================================================================
+EXC AI ANALYTICS - COMPLETE ARCHITECTURAL & INTERNAL LOGIC SPECIFICATION
+================================================================================
+
+1. GLOBAL SYSTEM FLOW
+--------------------------------------------------------------------------------
+The application operates as a "Self-Correcting Analytics Pipeline". 
+- START: User uploads an unknown CSV.
+- PROCESS: The Backend perform 13 stages of "Blind Analysis" where it discovers
+  the schema, meaning, and industry for itself.
+- END: The Frontend renders a tailored Executive Suite based on the discovery.
+
+
+2. MANDATORY BACKEND INTERNAL LOGIC (analysis/ Deep Dive)
+--------------------------------------------------------------------------------
+
+A. COLUMN_DETECTOR.PY (The Schema Engine)
+   Logic: Iterates every column and applies three levels of classification:
+   1. REGEX IDENTIFICATION: Checks if column contains "id", "code", "key".
+   2. RATIO MATH: If (Unique Values / Total Rows) > 0.95, it marks as an ID.
+   3. TYPECASTING: Attempts to force-convert to float or date. Successful conversion
+      locks the column into "Numeric Continuous" or "Datetime" categories.
+
+B. DATA_CLEANER.PY (The Hygiene Engine)
+   Logic:
+   1. NULLIFY: Replaces strings like '?', 'N/A', 'NaN' with standard pd.NA.
+   2. TRACE & DROP: Deletes any column flagged as an "Identifier" by the detector.
+   3. SCALE NORMALIZATION: If a column's max value is <= 1, it assumes it's a 
+      probability and scales it by 100 for percentage-based readability.
+
+C. **CHART_RECOMMENDER.PY (The Mandatory Strategy Engine)**
+   Logic: Implements a specific "Matrix of Statistical Compatibility":
+   1. Rule [Num+Num]: Recommend "SCATTER" for relationship discovery.
+   2. Rule [Cat+Num]: Recommend "BOX PLOT" to see distribution of values per group.
+   3. Rule [Cat+Sum]: Recommend "BAR" for comparative volume analysis.
+   4. Rule [Date+Num]: Recommend "LINE" for trend progression.
+   5. Rule [Num Single]: Recommend "HISTOGRAM" with 10-bin distribution.
+   6. Rule [Cat Single]: Recommend "PIE" if unique values are < 7.
+   Priority logic: Geographic maps are always pushed to Index 0 if location data 
+   is detected, ensuring "Global Intelligence" is the first thing the user sees.
+
+D. **CHART_DATA_GENERATOR.PY (The Aggregation Engine)**
+   Logic: Performs the actual heavy lifting of data reshaping:
+   1. BINNING: For Histograms, it calculates (Max-Min)/10 to create 10 distinct
+      ranges and counts the frequency of records in each range.
+   2. RESAMPLING: For time-series, it uses the 'ME' frequency to roll up messy 
+      daily data into clean monthly averages.
+   3. BOX-PLOT MATH: Explicitly calculates the 25th (Q1), 50th (Median), and 75th 
+      (Q3) percentiles so the frontend doesn't have to do math.
+   4. GEO-GROUPING: Maps city/team names to country centroids and SUMS the 
+      metric values to avoid overlapping markers.
+
+E. DATASET_PROFILER.PY 
+   Logic: Calculates "Descriptive Statistics". It detects Data Skew (if skew > 1)
+   to warn the user about imbalanced data in the executive summary.
+
+F. PREDICTIVE_MODELER.PY
+   Logic: 
+   1. TARGET SELECTION: Guesses the most important column (usually the last numeric
+      one) as the dependent variable.
+   2. MODEL AUTO-SWAP: 
+      - If Target = Categorical -> Uses Logistic Regression / Random Forest.
+      - If Target = Numeric -> Uses Linear Regression / Polynomial.
+   3. ACCURACY SCORING: Returns R2 or F1 scores to the frontend.
+
+G. GEO_ENGINE.PY
+   Logic: The "Coordinate Lookup". It uses a pycountry fallback layer. If 
+   ISO codes fail, it matches against a hardcoded "Team-to-Nation" map for 
+   sports data compatibility.
+
+H. BUSINESS_ADVISOR.PY
+   Logic: "Keyword Mapping". It scans headers for financial tokens (Balance, Price) 
+   vs medical tokens (Heart, Glucose). It then returns a "Domain ID" which 
+   tells the frontend exactly which UI layout to load.
+
+
+3. FRONTEND COMPONENTS LOGIC (frontend/ Deep Dive)
+--------------------------------------------------------------------------------
+
+A. RESULTSDASHBOARD.JSX (The View Controller)
+   Logic:
+   1. STATE MANAGEMENT: Controls `activeView` ('insights' vs 'charts').
+   2. DYNAMIC LAYOUT SWAP: Uses the `domainName` from the backend to conditionally
+      render <FinanceLayout /> or <HealthcareLayout />.
+   3. DEDUPLICATION: Ensures only ONE Geo-Map is rendered even if multiple 
+      geography columns were detected.
+   4. OPTIMIZATION: Rotates Recharts X-Axis labels by -45 degrees and shrinks 
+      font size to 9px if categorical names are long.
+
+B. GEOMAP.JSX (The Geospatial Layer)
+   Logic:
+   1. TOPOJSON RENDER: Loads world-atlas geometry and maps it to a SVG coordinate 
+      grid using 'react-simple-maps'.
+   2. D3 SCALING: Uses `scaleLinear` to map the backend 'value' (0 to 1M+) to 
+      a color gradient (Light Sky to Deep Blue).
+   3. CHOROPLETH vs POINT: 
+      - If backend sends 'ISO Codes' -> Fills the country paths (Choropleth).
+      - If backend sends 'Lat/Lon' -> Renders pulse circles (Markers).
+
+C. DOMAINLAYOUTS.JSX (The Modular UI)
+   Logic: Each layout is a customized "Slot-Based" container.
+   - Slot 1: Hero KPI Gauge.
+   - Slot 2: Primary Dynamic Chart.
+   - Slot 3: Correlation Matrix or Multi-Variate Analysis.
+   - It maps accent colors (Pink for Retail, Amber for Finance) to stay consistent.
+
+D. UPLOADVIEW.JSX
+   Logic: Handles the multi-part form submission. It prevents the user from 
+   uploading non-CSV files and manages the "Calculating..." animation state 
+   to mask the backend's heavy processing time.
+
+
+4. SUMMARY OF MANDATORY RULES
+--------------------------------------------------------------------------------
+1.  NO Identifiers: No chart will ever show ID, Name, or Serial Number.
+2.  NO Crashes: `jsonable_encoder` must wrap every single response.
+3.  AUTO-TITLES: Graph titles are derived from the X and Y column names.
+4.  TIME-AWARE: Time filters only appear if a Datetime column was detected.
+
+================================================================================
+Generated for: EXC Automated Analytics Platform
+================================================================================
