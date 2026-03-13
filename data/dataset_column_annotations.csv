@@ -1,0 +1,957 @@
+Dataset,Column,Detected_Type,Date_Format,Unique_Values,Dataset_Type
+Admission Chance.csv,Serial No,id,,400,tabular
+Admission Chance.csv,GRE Score,discrete,,49,tabular
+Admission Chance.csv,TOEFL Score,discrete,,29,tabular
+Admission Chance.csv,University Rating,categorical,,5,tabular
+Admission Chance.csv, SOP,continuous,,9,tabular
+Admission Chance.csv,LOR ,continuous,,9,tabular
+Admission Chance.csv,CGPA,continuous,,168,tabular
+Admission Chance.csv,Research,categorical,,2,tabular
+Admission Chance.csv,Chance of Admit ,continuous,,60,tabular
+Adult Salary.csv,Age,discrete,,74,tabular
+Adult Salary.csv,Gender,categorical,,2,tabular
+Adult Salary.csv,WorkingClass,categorical,,9,tabular
+Adult Salary.csv,Education,categorical,,16,tabular
+Adult Salary.csv,MaritalStatus,categorical,,7,tabular
+Adult Salary.csv,Occupation,categorical,,15,tabular
+Adult Salary.csv,Relationship,categorical,,6,tabular
+Adult Salary.csv,Race,categorical,,5,tabular
+Adult Salary.csv,NativeCountry,categorical,,42,tabular
+Adult Salary.csv,Income,categorical,,2,tabular
+AdultIncome.csv,age,discrete,,73,tabular
+AdultIncome.csv,workclass,categorical,,9,tabular
+AdultIncome.csv,fnlwgt,discrete,,21648,tabular
+AdultIncome.csv,education,categorical,,16,tabular
+AdultIncome.csv,education-num,discrete,,16,tabular
+AdultIncome.csv,marital-status,categorical,,7,tabular
+AdultIncome.csv,occupation,categorical,,15,tabular
+AdultIncome.csv,relationship,categorical,,6,tabular
+AdultIncome.csv,race,categorical,,5,tabular
+AdultIncome.csv,sex,categorical,,2,tabular
+AdultIncome.csv,capital-gain,discrete,,119,tabular
+AdultIncome.csv,capital-loss,discrete,,92,tabular
+AdultIncome.csv,hours-per-week,discrete,,94,tabular
+AdultIncome.csv,country,categorical,,42,tabular
+AdultIncome.csv,salary,categorical,,2,tabular
+Air Quality Missing Data.csv,Date,datetime,%d-%m-%Y,153,time_series
+Air Quality Missing Data.csv,Ozone,discrete,,67,time_series
+Air Quality Missing Data.csv,Solar,discrete,,117,time_series
+Air Quality Missing Data.csv,Wind,continuous,,31,time_series
+Air Quality Missing Data.csv,Temp,discrete,,40,time_series
+Airline Delay.csv,year,datetime,,2,time_series
+Airline Delay.csv,month,categorical,,1,time_series
+Airline Delay.csv,carrier,categorical,,17,time_series
+Airline Delay.csv,carrier_name,categorical,,17,time_series
+Airline Delay.csv,airport,text,,360,time_series
+Airline Delay.csv,airport_name,text,,360,time_series
+Airline Delay.csv,arr_flights,discrete,,751,time_series
+Airline Delay.csv,arr_del15,discrete,,332,time_series
+Airline Delay.csv,carrier_ct,continuous,,1601,time_series
+Airline Delay.csv,weather_ct,continuous,,543,time_series
+Airline Delay.csv,nas_ct,continuous,,1470,time_series
+Airline Delay.csv,security_ct,continuous,,164,time_series
+Airline Delay.csv,late_aircraft_ct,continuous,,1506,time_series
+Airline Delay.csv,arr_cancelled,discrete,,72,time_series
+Airline Delay.csv,arr_diverted,discrete,,23,time_series
+Airline Delay.csv,arr_delay,discrete,,2032,time_series
+Airline Delay.csv,carrier_delay,discrete,,1431,time_series
+Airline Delay.csv,weather_delay,discrete,,589,time_series
+Airline Delay.csv,nas_delay,discrete,,1014,time_series
+Airline Delay.csv,security_delay,discrete,,125,time_series
+Airline Delay.csv,late_aircraft_delay,discrete,,1354,time_series
+airlines.csv,IATA_CODE,categorical,,14,tabular
+airlines.csv,AIRLINE,categorical,,14,tabular
+Anagrams.csv,subidr,id,,20,tabular
+Anagrams.csv,attnr,categorical,,2,tabular
+Anagrams.csv,num1,categorical,,7,tabular
+Anagrams.csv,num2,continuous,,8,tabular
+Anagrams.csv,num3,categorical,,5,tabular
+Anscombe.csv,dataset,categorical,,4,tabular
+Anscombe.csv,x,discrete,,12,tabular
+Anscombe.csv,y,continuous,,43,tabular
+Attention.csv,Unnamed: 0,discrete,,60,tabular
+Attention.csv,subject,discrete,,20,tabular
+Attention.csv,attention,categorical,,2,tabular
+Attention.csv,solutions,categorical,,3,tabular
+Attention.csv,score,continuous,,9,tabular
+aug_test.csv,enrollee_id,id,,2129,tabular
+aug_test.csv,city,text,,108,tabular
+aug_test.csv,city_development_index,continuous,,81,tabular
+aug_test.csv,gender,categorical,,3,tabular
+aug_test.csv,relevent_experience,categorical,,2,tabular
+aug_test.csv,enrolled_university,categorical,,3,tabular
+aug_test.csv,education_level,categorical,,5,tabular
+aug_test.csv,major_discipline,categorical,,6,tabular
+aug_test.csv,experience,categorical,,22,tabular
+aug_test.csv,company_size,categorical,,8,tabular
+aug_test.csv,company_type,categorical,,6,tabular
+aug_test.csv,last_new_job,categorical,,6,tabular
+aug_test.csv,training_hours,discrete,,223,tabular
+Bank Churn Modelling.csv,CustomerId,id,,10000,transaction
+Bank Churn Modelling.csv,Surname,text,,2932,transaction
+Bank Churn Modelling.csv,CreditScore,discrete,,460,transaction
+Bank Churn Modelling.csv,Geography,categorical,,3,transaction
+Bank Churn Modelling.csv,Gender,categorical,,2,transaction
+Bank Churn Modelling.csv,Age,discrete,,70,transaction
+Bank Churn Modelling.csv,Tenure,discrete,,11,transaction
+Bank Churn Modelling.csv,Balance,continuous,,6382,transaction
+Bank Churn Modelling.csv,Num Of Products,categorical,,4,transaction
+Bank Churn Modelling.csv,Has Credit Card,categorical,,2,transaction
+Bank Churn Modelling.csv,Is Active Member,categorical,,2,transaction
+Bank Churn Modelling.csv,Estimated Salary,continuous,,9999,transaction
+Bank Churn Modelling.csv,Churn,categorical,,2,transaction
+BankWages.csv,rownames,discrete,,474,tabular
+BankWages.csv,job,categorical,,3,tabular
+BankWages.csv,education,categorical,,10,tabular
+BankWages.csv,gender,categorical,,2,tabular
+BankWages.csv,minority,categorical,,2,tabular
+Big Sales Data.csv,Item_Identifier,text,,1559,transaction
+Big Sales Data.csv,Item_Weight,continuous,,416,transaction
+Big Sales Data.csv,Item_Fat_Content,categorical,,5,transaction
+Big Sales Data.csv,Item_Visibility,continuous,,13006,transaction
+Big Sales Data.csv,Item_Type,categorical,,16,transaction
+Big Sales Data.csv,Item_MRP,continuous,,8052,transaction
+Big Sales Data.csv,Outlet_Identifier,categorical,,10,transaction
+Big Sales Data.csv,Outlet_Establishment_Year,datetime,,9,transaction
+Big Sales Data.csv,Outlet_Size,categorical,,3,transaction
+Big Sales Data.csv,Outlet_Location_Type,categorical,,3,transaction
+Big Sales Data.csv,Outlet_Type,categorical,,4,transaction
+Big Sales Data.csv,Item_Outlet_Sales,continuous,,9144,transaction
+Bike Prices.csv,Brand,categorical,,20,time_series
+Bike Prices.csv,Model,text,,279,time_series
+Bike Prices.csv,Selling_Price,discrete,,130,time_series
+Bike Prices.csv,Year,datetime,,28,time_series
+Bike Prices.csv,Seller_Type,categorical,,2,time_series
+Bike Prices.csv,Owner,categorical,,4,time_series
+Bike Prices.csv,KM_Driven,discrete,,304,time_series
+Bike Prices.csv,Ex_Showroom_Price,discrete,,230,time_series
+Bike Sharing Original Data.csv,Season,categorical,,4,panel
+Bike Sharing Original Data.csv,Year,datetime,,2,panel
+Bike Sharing Original Data.csv,Month,categorical,,12,panel
+Bike Sharing Original Data.csv,Holiday,categorical,,2,panel
+Bike Sharing Original Data.csv,Weekday,categorical,,7,panel
+Bike Sharing Original Data.csv,Working Day,categorical,,2,panel
+Bike Sharing Original Data.csv,Weather Situation,categorical,,3,panel
+Bike Sharing Original Data.csv,Temperature,continuous,,499,panel
+Bike Sharing Original Data.csv,Humidity,continuous,,595,panel
+Bike Sharing Original Data.csv,Wind Speed,continuous,,650,panel
+Bike Sharing Original Data.csv,Rider,id,,696,panel
+Bike Sharing Original Data.csv,Day Since,discrete,,731,panel
+Bike Sharing.csv,ID,id,,731,panel
+Bike Sharing.csv,Date,datetime,%d-%m-%Y,731,panel
+Bike Sharing.csv,Season,categorical,,4,panel
+Bike Sharing.csv,Year,categorical,,2,panel
+Bike Sharing.csv,Month,discrete,,12,panel
+Bike Sharing.csv,Holiday,categorical,,2,panel
+Bike Sharing.csv,Weekday,categorical,,7,panel
+Bike Sharing.csv,Working Day,categorical,,2,panel
+Bike Sharing.csv,Weather,categorical,,3,panel
+Bike Sharing.csv,Temp,continuous,,499,panel
+Bike Sharing.csv,Temp©,continuous,,690,panel
+Bike Sharing.csv,Humidity,continuous,,595,panel
+Bike Sharing.csv,Windspeed,continuous,,650,panel
+Bike Sharing.csv,Casual Rider,discrete,,606,panel
+Bike Sharing.csv,Registered Rider,discrete,,679,panel
+Bike Sharing.csv,Total Rider,id,,696,panel
+BitcoinPricePrediction.csv,Date,datetime,%Y-%m-%d,3093,transaction
+BitcoinPricePrediction.csv,opening_price,continuous,,2907,transaction
+BitcoinPricePrediction.csv,highest_price,continuous,,2901,transaction
+BitcoinPricePrediction.csv,lowest_price,continuous,,2906,transaction
+BitcoinPricePrediction.csv,closing_price,continuous,,2915,transaction
+BitcoinPricePrediction.csv,transactions_in_blockchain,discrete,,3070,transaction
+BitcoinPricePrediction.csv,avg_block_size,discrete,,3076,transaction
+BitcoinPricePrediction.csv,sent_by_adress,discrete,,3082,transaction
+BitcoinPricePrediction.csv,avg_mining_difficulty,discrete,,472,transaction
+BitcoinPricePrediction.csv,avg_hashrate,discrete,,3093,transaction
+BitcoinPricePrediction.csv,mining_profitability,continuous,,2017,transaction
+BitcoinPricePrediction.csv,sent_coins_in_usd,discrete,,3093,transaction
+BitcoinPricePrediction.csv,avg_transaction_fees,continuous,,2060,transaction
+BitcoinPricePrediction.csv,median_transaction_fees,continuous,,1729,transaction
+BitcoinPricePrediction.csv,avg_block_time,continuous,,135,transaction
+BitcoinPricePrediction.csv,avg_transaction_value,continuous,,2963,transaction
+BitcoinPricePrediction.csv,median_transaction_value,continuous,,3075,transaction
+BitcoinPricePrediction.csv,tweets,continuous,,2653,transaction
+BitcoinPricePrediction.csv,google_trends,continuous,,2227,transaction
+BitcoinPricePrediction.csv,active_addresses,continuous,,3092,transaction
+BitcoinPricePrediction.csv,top100_to_total_percentage,continuous,,2373,transaction
+BitcoinPricePrediction.csv,avg_fee_to_reward,continuous,,2278,transaction
+BitcoinPricePrediction.csv,number_of_coins_in_circulation,continuous,,3091,transaction
+BitcoinPricePrediction.csv,miner_revenue,continuous,,3087,transaction
+BitcoinPricePrediction.csv,next_day_closing_price,continuous,,2916,transaction
+Boston.csv,CRIM,continuous,,504,tabular
+Boston.csv,ZN,continuous,,26,tabular
+Boston.csv,INDUS,continuous,,76,tabular
+Boston.csv,CHAS,categorical,,2,tabular
+Boston.csv,NX,continuous,,81,tabular
+Boston.csv,RM,continuous,,446,tabular
+Boston.csv,AGE,continuous,,356,tabular
+Boston.csv,DIS,continuous,,412,tabular
+Boston.csv,RAD,categorical,,9,tabular
+Boston.csv,TAX,discrete,,66,tabular
+Boston.csv,PTRATIO,continuous,,46,tabular
+Boston.csv,B,continuous,,357,tabular
+Boston.csv,LSTAT,continuous,,455,tabular
+Boston.csv,MEDV,continuous,,229,tabular
+Car Crashes.csv,total,continuous,,45,tabular
+Car Crashes.csv,speeding,continuous,,50,tabular
+Car Crashes.csv,alcohol,continuous,,50,tabular
+Car Crashes.csv,not_distracted,continuous,,50,tabular
+Car Crashes.csv,no_previous,continuous,,50,tabular
+Car Crashes.csv,ins_premium,continuous,,51,tabular
+Car Crashes.csv,ins_losses,continuous,,51,tabular
+Car Crashes.csv,abbrev,text,,51,tabular
+Car Depriciation.csv,Car_Name,text,,98,time_series
+Car Depriciation.csv,Year,datetime,,16,time_series
+Car Depriciation.csv,Selling_Price,continuous,,156,time_series
+Car Depriciation.csv,Initial_Price,continuous,,147,time_series
+Car Depriciation.csv,KM_Driven,discrete,,206,time_series
+Car Depriciation.csv,Fuel_Type,categorical,,3,time_series
+Car Depriciation.csv,Seller_Type,categorical,,2,time_series
+Car Depriciation.csv,Transmission,categorical,,2,time_series
+Car Depriciation.csv,Owner,categorical,,3,time_series
+Car Evaluation.csv,buying price,categorical,,4,tabular
+Car Evaluation.csv,maintenance cost,categorical,,4,tabular
+Car Evaluation.csv,number of doors,categorical,,4,tabular
+Car Evaluation.csv,number of persons,categorical,,3,tabular
+Car Evaluation.csv,luggage boot,categorical,,3,tabular
+Car Evaluation.csv,safety,categorical,,3,tabular
+Car Evaluation.csv,decision,categorical,,4,tabular
+Car Price.csv,Brand,categorical,,29,time_series
+Car Price.csv,Model,text,,1491,time_series
+Car Price.csv,Year,datetime,,27,time_series
+Car Price.csv,Selling_Price,discrete,,445,time_series
+Car Price.csv,KM_Driven,discrete,,770,time_series
+Car Price.csv,Fuel,categorical,,5,time_series
+Car Price.csv,Seller_Type,categorical,,3,time_series
+Car Price.csv,Transmission,categorical,,2,time_series
+Car Price.csv,Owner,categorical,,5,time_series
+Car Sales Missing Data.csv,Make,categorical,,4,tabular
+Car Sales Missing Data.csv,Colour,categorical,,5,tabular
+Car Sales Missing Data.csv,Odometer (KM),discrete,,948,tabular
+Car Sales Missing Data.csv,Doors,categorical,,3,tabular
+Car Sales Missing Data.csv,Price,text,,934,tabular
+Car Selling Price.csv,Brand,text,,2058,time_series
+Car Selling Price.csv,Year,datetime,,29,time_series
+Car Selling Price.csv,Fuel,categorical,,4,time_series
+Car Selling Price.csv,Transmission,categorical,,2,time_series
+Car Selling Price.csv,Engine,text,,121,time_series
+Car Selling Price.csv,Max_Power,text,,322,time_series
+Car Selling Price.csv,Torque,text,,441,time_series
+Car Selling Price.csv,Seats,categorical,,9,time_series
+Car Selling Price.csv,Mileage,text,,393,time_series
+Car Selling Price.csv,KM_Driven,discrete,,921,time_series
+Car Selling Price.csv,Owner,categorical,,5,time_series
+Car Selling Price.csv,Seller_Type,categorical,,3,time_series
+Car Selling Price.csv,Selling_Price,discrete,,677,time_series
+CigarettesB.csv,rownames,categorical,,46,tabular
+CigarettesB.csv,packs,continuous,,46,tabular
+CigarettesB.csv,price,continuous,,46,tabular
+CigarettesB.csv,income,continuous,,46,tabular
+CPSSWEducation.csv,rownames,discrete,,2950,tabular
+CPSSWEducation.csv,age,categorical,,2,tabular
+CPSSWEducation.csv,gender,categorical,,2,tabular
+CPSSWEducation.csv,earnings,continuous,,822,tabular
+CPSSWEducation.csv,education,categorical,,10,tabular
+Credit Default.csv,Income,continuous,,2000,tabular
+Credit Default.csv,Age,continuous,,2000,tabular
+Credit Default.csv,Loan,continuous,,2000,tabular
+Credit Default.csv,Loan to Income,continuous,,2000,tabular
+Credit Default.csv,Default,categorical,,2,tabular
+Customer Purchase.csv,Customer ID,id,,50,transaction
+Customer Purchase.csv,Age,discrete,,41,transaction
+Customer Purchase.csv,Gender,categorical,,2,transaction
+Customer Purchase.csv,Education,categorical,,3,transaction
+Customer Purchase.csv,Review,categorical,,3,transaction
+Customer Purchase.csv,Purchased,categorical,,2,transaction
+Customer Segmentation.csv,CustomerID,id,,200,tabular
+Customer Segmentation.csv,Gender,categorical,,2,tabular
+Customer Segmentation.csv,Age,discrete,,51,tabular
+Customer Segmentation.csv,Annual Income (k$),discrete,,64,tabular
+Customer Segmentation.csv,Spending Score (1-100),discrete,,84,tabular
+Customer Spending Score.csv,Gender,categorical,,2,tabular
+Customer Spending Score.csv,Age,discrete,,51,tabular
+Customer Spending Score.csv,Annual Income (k$),discrete,,64,tabular
+Customer Spending Score.csv,Spending Score (1-100),discrete,,84,tabular
+CyclingDeaths.csv,rownames,discrete,,208,time_series
+CyclingDeaths.csv,date,datetime,%Y-%m-%d,208,time_series
+CyclingDeaths.csv,deaths,categorical,,4,time_series
+DataCoSupplyChainDataset.csv,Type,categorical,,4,transaction
+DataCoSupplyChainDataset.csv,Days for shipping (real),categorical,,7,transaction
+DataCoSupplyChainDataset.csv,Days for shipment (scheduled),categorical,,4,transaction
+DataCoSupplyChainDataset.csv,Benefit per order,continuous,,17855,transaction
+DataCoSupplyChainDataset.csv,Sales per customer,continuous,,2803,transaction
+DataCoSupplyChainDataset.csv,Delivery Status,categorical,,4,transaction
+DataCoSupplyChainDataset.csv,Late_delivery_risk,categorical,,2,transaction
+DataCoSupplyChainDataset.csv,Category Id,discrete,,51,transaction
+DataCoSupplyChainDataset.csv,Category Name,text,,50,transaction
+DataCoSupplyChainDataset.csv,Customer City,text,,563,transaction
+DataCoSupplyChainDataset.csv,Customer Country,categorical,,2,transaction
+DataCoSupplyChainDataset.csv,Customer Email,categorical,,1,transaction
+DataCoSupplyChainDataset.csv,Customer Fname,text,,767,transaction
+DataCoSupplyChainDataset.csv,Customer Id,discrete,,17535,transaction
+DataCoSupplyChainDataset.csv,Customer Lname,text,,1101,transaction
+DataCoSupplyChainDataset.csv,Customer Password,categorical,,1,transaction
+DataCoSupplyChainDataset.csv,Customer Segment,categorical,,3,transaction
+DataCoSupplyChainDataset.csv,Customer State,categorical,,46,transaction
+DataCoSupplyChainDataset.csv,Customer Street,text,,7202,transaction
+DataCoSupplyChainDataset.csv,Customer Zipcode,discrete,,995,transaction
+DataCoSupplyChainDataset.csv,Department Id,discrete,,11,transaction
+DataCoSupplyChainDataset.csv,Department Name,categorical,,11,transaction
+DataCoSupplyChainDataset.csv,Latitude,continuous,,9714,transaction
+DataCoSupplyChainDataset.csv,Longitude,continuous,,4393,transaction
+DataCoSupplyChainDataset.csv,Market,categorical,,5,transaction
+DataCoSupplyChainDataset.csv,Order City,text,,3486,transaction
+DataCoSupplyChainDataset.csv,Order Country,text,,162,transaction
+DataCoSupplyChainDataset.csv,Order Customer Id,discrete,,17535,transaction
+DataCoSupplyChainDataset.csv,order date (DateOrders),datetime,mixed,47061,transaction
+DataCoSupplyChainDataset.csv,Order Id,discrete,,47061,transaction
+DataCoSupplyChainDataset.csv,Order Item Cardprod Id,discrete,,118,transaction
+DataCoSupplyChainDataset.csv,Order Item Discount,continuous,,982,transaction
+DataCoSupplyChainDataset.csv,Order Item Discount Rate,continuous,,18,transaction
+DataCoSupplyChainDataset.csv,Order Item Id,id,,100000,transaction
+DataCoSupplyChainDataset.csv,Order Item Product Price,continuous,,75,transaction
+DataCoSupplyChainDataset.csv,Order Item Profit Ratio,continuous,,162,transaction
+DataCoSupplyChainDataset.csv,Order Item Quantity,categorical,,5,transaction
+DataCoSupplyChainDataset.csv,Sales,continuous,,193,transaction
+DataCoSupplyChainDataset.csv,Order Item Total,continuous,,2803,transaction
+DataCoSupplyChainDataset.csv,Order Profit Per Order,continuous,,17855,transaction
+DataCoSupplyChainDataset.csv,Order Region,categorical,,23,transaction
+DataCoSupplyChainDataset.csv,Order State,text,,1071,transaction
+DataCoSupplyChainDataset.csv,Order Status,categorical,,9,transaction
+DataCoSupplyChainDataset.csv,Order Zipcode,discrete,,582,transaction
+DataCoSupplyChainDataset.csv,Product Card Id,discrete,,118,transaction
+DataCoSupplyChainDataset.csv,Product Category Id,discrete,,51,transaction
+DataCoSupplyChainDataset.csv,Product Description,text,,0,transaction
+DataCoSupplyChainDataset.csv,Product Image,text,,118,transaction
+DataCoSupplyChainDataset.csv,Product Name,text,,118,transaction
+DataCoSupplyChainDataset.csv,Product Price,continuous,,75,transaction
+DataCoSupplyChainDataset.csv,Product Status,categorical,,1,transaction
+DataCoSupplyChainDataset.csv,shipping date (DateOrders),datetime,mixed,45982,transaction
+DataCoSupplyChainDataset.csv,Shipping Mode,categorical,,4,transaction
+Diabetes.csv,pregnancies,discrete,,17,tabular
+Diabetes.csv,glucose,discrete,,136,tabular
+Diabetes.csv,diastolic,discrete,,47,tabular
+Diabetes.csv,triceps,discrete,,51,tabular
+Diabetes.csv,insulin,discrete,,186,tabular
+Diabetes.csv,bmi,continuous,,248,tabular
+Diabetes.csv,dpf,continuous,,517,tabular
+Diabetes.csv,age,discrete,,52,tabular
+Diabetes.csv,diabetes,categorical,,2,tabular
+Diamonds.csv,carat,continuous,,273,tabular
+Diamonds.csv,cut,categorical,,5,tabular
+Diamonds.csv,color,categorical,,7,tabular
+Diamonds.csv,clarity,categorical,,8,tabular
+Diamonds.csv,depth,continuous,,184,tabular
+Diamonds.csv,table,continuous,,127,tabular
+Diamonds.csv,price,discrete,,11602,tabular
+Diamonds.csv,x,continuous,,554,tabular
+Diamonds.csv,y,continuous,,552,tabular
+Diamonds.csv,z,continuous,,375,tabular
+DutchSales.csv,rownames,discrete,,425,time_series
+DutchSales.csv,time,datetime,,425,time_series
+DutchSales.csv,value,discrete,,101,time_series
+Economy of Scale.csv,Units,continuous,,75,tabular
+Economy of Scale.csv,Cost,continuous,,349,tabular
+Electricity1970.csv,rownames,discrete,,158,tabular
+Electricity1970.csv,cost,continuous,,158,tabular
+Electricity1970.csv,output,continuous,,157,tabular
+Electricity1970.csv,labor,continuous,,158,tabular
+Electricity1970.csv,laborshare,continuous,,147,tabular
+Electricity1970.csv,capital,continuous,,122,tabular
+Electricity1970.csv,capitalshare,continuous,,149,tabular
+Electricity1970.csv,fuel,continuous,,154,tabular
+Electricity1970.csv,fuelshare,continuous,,152,tabular
+EmployeeAttrition.csv,Age,discrete,,43,tabular
+EmployeeAttrition.csv,Attrition,categorical,,2,tabular
+EmployeeAttrition.csv,BusinessTravel,categorical,,3,tabular
+EmployeeAttrition.csv,DailyRate,discrete,,886,tabular
+EmployeeAttrition.csv,Department,categorical,,3,tabular
+EmployeeAttrition.csv,DistanceFromHome,discrete,,29,tabular
+EmployeeAttrition.csv,Education,categorical,,5,tabular
+EmployeeAttrition.csv,EducationField,categorical,,6,tabular
+EmployeeAttrition.csv,EmployeeCount,categorical,,1,tabular
+EmployeeAttrition.csv,EmployeeNumber,id,,1470,tabular
+EmployeeAttrition.csv,EnvironmentSatisfaction,categorical,,4,tabular
+EmployeeAttrition.csv,Gender,categorical,,2,tabular
+EmployeeAttrition.csv,HourlyRate,discrete,,71,tabular
+EmployeeAttrition.csv,JobInvolvement,categorical,,4,tabular
+EmployeeAttrition.csv,JobLevel,categorical,,5,tabular
+EmployeeAttrition.csv,JobRole,categorical,,9,tabular
+EmployeeAttrition.csv,JobSatisfaction,categorical,,4,tabular
+EmployeeAttrition.csv,MaritalStatus,categorical,,3,tabular
+EmployeeAttrition.csv,MonthlyIncome,discrete,,1349,tabular
+EmployeeAttrition.csv,MonthlyRate,discrete,,1427,tabular
+EmployeeAttrition.csv,NumCompaniesWorked,categorical,,10,tabular
+EmployeeAttrition.csv,Over18,categorical,,1,tabular
+EmployeeAttrition.csv,OverTime,categorical,,2,tabular
+EmployeeAttrition.csv,PercentSalaryHike,discrete,,15,tabular
+EmployeeAttrition.csv,PerformanceRating,categorical,,2,tabular
+EmployeeAttrition.csv,RelationshipSatisfaction,categorical,,4,tabular
+EmployeeAttrition.csv,StandardHours,categorical,,1,tabular
+EmployeeAttrition.csv,StockOptionLevel,categorical,,4,tabular
+EmployeeAttrition.csv,TotalWorkingYears,discrete,,40,tabular
+EmployeeAttrition.csv,TrainingTimesLastYear,categorical,,7,tabular
+EmployeeAttrition.csv,WorkLifeBalance,categorical,,4,tabular
+EmployeeAttrition.csv,YearsAtCompany,discrete,,37,tabular
+EmployeeAttrition.csv,YearsInCurrentRole,discrete,,19,tabular
+EmployeeAttrition.csv,YearsSinceLastPromotion,discrete,,16,tabular
+EmployeeAttrition.csv,YearsWithCurrManager,discrete,,18,tabular
+Equipment.csv,rownames,categorical,,25,tabular
+Equipment.csv,valueadded,continuous,,25,tabular
+Equipment.csv,capital,continuous,,25,tabular
+Equipment.csv,labor,continuous,,25,tabular
+Equipment.csv,firms,discrete,,25,tabular
+Exercise.csv,Unnamed: 0,discrete,,90,tabular
+Exercise.csv,id,discrete,,30,tabular
+Exercise.csv,diet,categorical,,2,tabular
+Exercise.csv,pulse,discrete,,39,tabular
+Exercise.csv,time,categorical,,3,tabular
+Exercise.csv,kind,categorical,,3,tabular
+Financial Market News.csv,Date,datetime,%d-%m-%Y,4101,time_series
+Financial Market News.csv,Label,categorical,,2,time_series
+Financial Market News.csv,News 1,text,,4074,time_series
+Financial Market News.csv,News 2,text,,4082,time_series
+Financial Market News.csv,News 3,text,,4081,time_series
+Financial Market News.csv,News 4,text,,4087,time_series
+Financial Market News.csv,News 5,text,,4070,time_series
+Financial Market News.csv,News 6,text,,4075,time_series
+Financial Market News.csv,News 7,text,,4078,time_series
+Financial Market News.csv,News 8,text,,4080,time_series
+Financial Market News.csv,News 9,text,,4085,time_series
+Financial Market News.csv,News 10,text,,4077,time_series
+Financial Market News.csv,News 11,text,,4074,time_series
+Financial Market News.csv,News 12,text,,4080,time_series
+Financial Market News.csv,News 13,text,,4082,time_series
+Financial Market News.csv,News 14,text,,4081,time_series
+Financial Market News.csv,News 15,text,,4083,time_series
+Financial Market News.csv,News 16,text,,4083,time_series
+Financial Market News.csv,News 17,text,,4077,time_series
+Financial Market News.csv,News 18,text,,4082,time_series
+Financial Market News.csv,News 19,text,,4078,time_series
+Financial Market News.csv,News 20,text,,4078,time_series
+Financial Market News.csv,News 21,text,,4077,time_series
+Financial Market News.csv,News 22,text,,4078,time_series
+Financial Market News.csv,News 23,text,,4072,time_series
+Financial Market News.csv,News 24,text,,4078,time_series
+Financial Market News.csv,News 25,text,,4066,time_series
+Fish.csv,Category,categorical,,7,tabular
+Fish.csv,Species,categorical,,7,tabular
+Fish.csv,Weight,continuous,,101,tabular
+Fish.csv,Height,continuous,,154,tabular
+Fish.csv,Width,continuous,,152,tabular
+Fish.csv,Length1,continuous,,116,tabular
+Fish.csv,Length2,continuous,,93,tabular
+Fish.csv,Length3,continuous,,124,tabular
+Flights.csv,year,datetime,,12,time_series
+Flights.csv,month,categorical,,12,time_series
+Flights.csv,passengers,discrete,,118,time_series
+Flipkart Headphones.csv,Model,text,,591,tabular
+Flipkart Headphones.csv,Company,text,,202,tabular
+Flipkart Headphones.csv,Color,text,,94,tabular
+Flipkart Headphones.csv,Type,categorical,,16,tabular
+Flipkart Headphones.csv,Average Rating,continuous,,21,tabular
+Flipkart Headphones.csv,Number of Ratings,discrete,,434,tabular
+Flipkart Headphones.csv,Selling Price,discrete,,241,tabular
+Flipkart Headphones.csv,Maximum Retail Price,discrete,,106,tabular
+Flipkart Headphones.csv,Discount,discrete,,416,tabular
+Fruits.csv,Fruit Category,categorical,,3,tabular
+Fruits.csv,Fruit Name,categorical,,3,tabular
+Fruits.csv,Fruit Weight,discrete,,39,tabular
+Fruits.csv,Fruit Width,continuous,,24,tabular
+Fruits.csv,Fruit Length,continuous,,28,tabular
+Fruits.csv,Fruit Colour Score,continuous,,27,tabular
+FuelEconomy.csv,Horsepower,discrete,,84,tabular
+FuelEconomy.csv,Fuel Economy,discrete,,20,tabular
+Gapminder.csv,Year,datetime,,12,time_series
+Gapminder.csv,Continent,categorical,,5,time_series
+Gapminder.csv,Country,text,,142,time_series
+Gapminder.csv,Population,discrete,,1704,time_series
+Gapminder.csv,Life_Expectancy,continuous,,1626,time_series
+Gapminder.csv,GDP_per_Capita,continuous,,1704,time_series
+Google_Stock_Price_Train.csv,Date,datetime,%m/%d/%Y,1258,time_series
+Google_Stock_Price_Train.csv,Open,continuous,,1215,time_series
+Google_Stock_Price_Train.csv,High,continuous,,1219,time_series
+Google_Stock_Price_Train.csv,Low,continuous,,1223,time_series
+Google_Stock_Price_Train.csv,Close,text,,1241,time_series
+Google_Stock_Price_Train.csv,Volume,text,,1240,time_series
+GrowthSW.csv,rownames,text,,65,tabular
+GrowthSW.csv,growth,continuous,,65,tabular
+GrowthSW.csv,rgdp60,continuous,,65,tabular
+GrowthSW.csv,tradeshare,continuous,,65,tabular
+GrowthSW.csv,education,continuous,,63,tabular
+GrowthSW.csv,revolutions,continuous,,23,tabular
+GrowthSW.csv,assassinations,continuous,,26,tabular
+Home Equity Data.csv,Default,categorical,,2,tabular
+Home Equity Data.csv,LOAN,discrete,,472,tabular
+Home Equity Data.csv,MORTDUE,discrete,,3418,tabular
+Home Equity Data.csv,VALUE,discrete,,3412,tabular
+Home Equity Data.csv,REASON,categorical,,2,tabular
+Home Equity Data.csv,Reason_D,categorical,,2,tabular
+Home Equity Data.csv,JOB,categorical,,6,tabular
+Home Equity Data.csv,Mgr_D,categorical,,2,tabular
+Home Equity Data.csv,Office_D,categorical,,2,tabular
+Home Equity Data.csv,Prof_D,categorical,,2,tabular
+Home Equity Data.csv,Sales_D,categorical,,2,tabular
+Home Equity Data.csv,Self_D,categorical,,2,tabular
+Home Equity Data.csv,YOJ,discrete,,37,tabular
+Home Equity Data.csv,DEROG,discrete,,11,tabular
+Home Equity Data.csv,DELINQ,categorical,,10,tabular
+Home Equity Data.csv,CLAGE,continuous,,3462,tabular
+Home Equity Data.csv,NINQ,discrete,,13,tabular
+Home Equity Data.csv,CLNO,discrete,,59,tabular
+Home Equity Data.csv,DEBTINC,continuous,,3462,tabular
+House Prices.csv,ID,id,,21613,time_series
+House Prices.csv,Date,text,,372,time_series
+House Prices.csv,Price,discrete,,3625,time_series
+House Prices.csv,Bedrooms,discrete,,13,time_series
+House Prices.csv,Bathrooms,continuous,,30,time_series
+House Prices.csv,Sqft_living,discrete,,1038,time_series
+House Prices.csv,Sqft_lot,discrete,,9782,time_series
+House Prices.csv,Floors,continuous,,6,time_series
+House Prices.csv,Waterfront,categorical,,2,time_series
+House Prices.csv,View,categorical,,5,time_series
+House Prices.csv,Condition,categorical,,5,time_series
+House Prices.csv,Grade,discrete,,12,time_series
+House Prices.csv,Sqft_above,discrete,,946,time_series
+House Prices.csv,Sqft_basement,discrete,,306,time_series
+House Prices.csv,Yr_built,datetime,,116,time_series
+House Prices.csv,Yr_renovated,discrete,,70,time_series
+House Prices.csv,zipcode,discrete,,70,time_series
+House Prices.csv,Lat,continuous,,5034,time_series
+House Prices.csv,Long,continuous,,752,time_series
+House Prices.csv,Sqft_living15,discrete,,777,time_series
+House Prices.csv,Sqft_lot15,discrete,,8689,time_series
+HousePrices.csv,rownames,discrete,,546,tabular
+HousePrices.csv,price,discrete,,219,tabular
+HousePrices.csv,lotsize,discrete,,284,tabular
+HousePrices.csv,bedrooms,categorical,,6,tabular
+HousePrices.csv,bathrooms,categorical,,4,tabular
+HousePrices.csv,stories,categorical,,4,tabular
+HousePrices.csv,driveway,categorical,,2,tabular
+HousePrices.csv,recreation,categorical,,2,tabular
+HousePrices.csv,fullbase,categorical,,2,tabular
+HousePrices.csv,gasheat,categorical,,2,tabular
+HousePrices.csv,aircon,categorical,,2,tabular
+HousePrices.csv,garage,categorical,,4,tabular
+HousePrices.csv,prefer,categorical,,2,tabular
+HRDataset.csv,EmpID,id,,311,time_series
+HRDataset.csv,Employee_Name,text,,311,time_series
+HRDataset.csv,DOB,datetime,mixed,307,time_series
+HRDataset.csv,Gender,categorical,,2,time_series
+HRDataset.csv,GenderID,categorical,,2,time_series
+HRDataset.csv,MaritalDesc,categorical,,5,time_series
+HRDataset.csv,MaritalStatusID,categorical,,5,time_series
+HRDataset.csv,MarriedID,categorical,,2,time_series
+HRDataset.csv,EmploymentStatus,categorical,,3,time_series
+HRDataset.csv,EmpStatusID,categorical,,5,time_series
+HRDataset.csv,Department,categorical,,6,time_series
+HRDataset.csv,DeptID,categorical,,6,time_series
+HRDataset.csv,PerfScoreID,categorical,,4,time_series
+HRDataset.csv,FromDiversityJobFairID,categorical,,2,time_series
+HRDataset.csv,Salary,discrete,,308,time_series
+HRDataset.csv,PositionID,discrete,,30,time_series
+HRDataset.csv,Position,categorical,,32,time_series
+HRDataset.csv,State,categorical,,28,time_series
+HRDataset.csv,Zip,discrete,,158,time_series
+HRDataset.csv,CitizenDesc,categorical,,3,time_series
+HRDataset.csv,HispanicLatino,categorical,,4,time_series
+HRDataset.csv,RaceDesc,categorical,,6,time_series
+HRDataset.csv,DateofHire,datetime,mixed,101,time_series
+HRDataset.csv,DateofTermination,datetime,mixed,96,time_series
+HRDataset.csv,Termd,categorical,,2,time_series
+HRDataset.csv,TermReason,categorical,,18,time_series
+HRDataset.csv,ManagerName,categorical,,21,time_series
+HRDataset.csv,ManagerID,discrete,,23,time_series
+HRDataset.csv,RecruitmentSource,categorical,,9,time_series
+HRDataset.csv,PerformanceScore,categorical,,4,time_series
+HRDataset.csv,EngagementSurvey,continuous,,119,time_series
+HRDataset.csv,EmpSatisfaction,categorical,,5,time_series
+HRDataset.csv,SpecialProjectsCount,categorical,,9,time_series
+HRDataset.csv,LastPerformanceReview_Date,datetime,mixed,137,time_series
+HRDataset.csv,DaysLateLast30,categorical,,7,time_series
+HRDataset.csv,Absences,discrete,,20,time_series
+Ice Cream.csv,Temperature,continuous,,250,tabular
+Ice Cream.csv,Revenue,discrete,,344,tabular
+Insurance Premium.csv,ID,id,,1338,tabular
+Insurance Premium.csv,Age,discrete,,47,tabular
+Insurance Premium.csv,Gender,categorical,,2,tabular
+Insurance Premium.csv,BMI,continuous,,548,tabular
+Insurance Premium.csv,Children,categorical,,6,tabular
+Insurance Premium.csv,Smoker,categorical,,2,tabular
+Insurance Premium.csv,Region,categorical,,4,tabular
+Insurance Premium.csv,Premium,discrete,,1294,tabular
+insurance.csv,age,discrete,,47,tabular
+insurance.csv,sex,categorical,,2,tabular
+insurance.csv,bmi,continuous,,548,tabular
+insurance.csv,children,categorical,,6,tabular
+insurance.csv,smoker,categorical,,2,tabular
+insurance.csv,region,categorical,,4,tabular
+insurance.csv,charges,continuous,,1337,tabular
+IP.csv,DATE,datetime,mixed,88,time_series
+IP.csv,IP_YOY,continuous,,79,time_series
+Loan Eligibility Prediction.csv,Customer_ID,id,,614,tabular
+Loan Eligibility Prediction.csv,Gender,categorical,,2,tabular
+Loan Eligibility Prediction.csv,Married,categorical,,2,tabular
+Loan Eligibility Prediction.csv,Dependents,categorical,,4,tabular
+Loan Eligibility Prediction.csv,Education,categorical,,2,tabular
+Loan Eligibility Prediction.csv,Self_Employed,categorical,,2,tabular
+Loan Eligibility Prediction.csv,Applicant_Income,discrete,,505,tabular
+Loan Eligibility Prediction.csv,Coapplicant_Income,continuous,,287,tabular
+Loan Eligibility Prediction.csv,Loan_Amount,discrete,,208,tabular
+Loan Eligibility Prediction.csv,Loan_Amount_Term,categorical,,10,tabular
+Loan Eligibility Prediction.csv,Credit_History,categorical,,2,tabular
+Loan Eligibility Prediction.csv,Property_Area,categorical,,3,tabular
+Loan Eligibility Prediction.csv,Loan_Status,categorical,,2,tabular
+ManufactCosts.csv,rownames,discrete,,25,tabular
+ManufactCosts.csv,cost,continuous,,25,tabular
+ManufactCosts.csv,capitalcost,continuous,,25,tabular
+ManufactCosts.csv,laborcost,continuous,,25,tabular
+ManufactCosts.csv,energycost,continuous,,25,tabular
+ManufactCosts.csv,materialscost,continuous,,25,tabular
+ManufactCosts.csv,capitalprice,continuous,,25,tabular
+ManufactCosts.csv,laborprice,continuous,,25,tabular
+ManufactCosts.csv,energyprice,continuous,,25,tabular
+ManufactCosts.csv,materialsprice,continuous,,25,tabular
+medExpenses.csv,rownames,discrete,,33,tabular
+medExpenses.csv,familysize,categorical,,6,tabular
+medExpenses.csv,expenses,continuous,,31,tabular
+mifem.csv,rownames,discrete,,1295,tabular
+mifem.csv,outcome,categorical,,2,tabular
+mifem.csv,age,discrete,,34,tabular
+mifem.csv,yronset,categorical,,9,tabular
+mifem.csv,premi,categorical,,3,tabular
+mifem.csv,smstat,categorical,,4,tabular
+mifem.csv,diabetes,categorical,,3,tabular
+mifem.csv,highbp,categorical,,3,tabular
+mifem.csv,hichol,categorical,,3,tabular
+mifem.csv,angina,categorical,,3,tabular
+mifem.csv,stroke,categorical,,3,tabular
+MotorCycles2.csv,rownames,discrete,,67,time_series
+MotorCycles2.csv,time,datetime,,67,time_series
+MotorCycles2.csv,value,discrete,,59,time_series
+Movies Recommendation.csv,Movie_ID,id,,4760,transaction
+Movies Recommendation.csv,Movie_Title,text,,4757,transaction
+Movies Recommendation.csv,Movie_Genre,text,,1164,transaction
+Movies Recommendation.csv,Movie_Language,categorical,,37,transaction
+Movies Recommendation.csv,Movie_Budget,discrete,,436,transaction
+Movies Recommendation.csv,Movie_Popularity,continuous,,4759,transaction
+Movies Recommendation.csv,Movie_Release_Date,datetime,%d-%m-%Y,3260,transaction
+Movies Recommendation.csv,Movie_Revenue,discrete,,3285,transaction
+Movies Recommendation.csv,Movie_Runtime,discrete,,156,transaction
+Movies Recommendation.csv,Movie_Vote,continuous,,69,transaction
+Movies Recommendation.csv,Movie_Vote_Count,discrete,,1604,transaction
+Movies Recommendation.csv,Movie_Homepage,text,,1678,transaction
+Movies Recommendation.csv,Movie_Keywords,text,,4202,transaction
+Movies Recommendation.csv,Movie_Overview,text,,4757,transaction
+Movies Recommendation.csv,Movie_Production_House,text,,3682,transaction
+Movies Recommendation.csv,Movie_Production_Country,text,,466,transaction
+Movies Recommendation.csv,Movie_Spoken_Language,text,,541,transaction
+Movies Recommendation.csv,Movie_Tagline,text,,3927,transaction
+Movies Recommendation.csv,Movie_Cast,text,,4714,transaction
+Movies Recommendation.csv,Movie_Crew,text,,4747,transaction
+Movies Recommendation.csv,Movie_Director,text,,2331,transaction
+NaturalGas.csv,rownames,discrete,,138,time_series
+NaturalGas.csv,state,categorical,,6,time_series
+NaturalGas.csv,statecode,categorical,,6,time_series
+NaturalGas.csv,year,datetime,,23,time_series
+NaturalGas.csv,consumption,discrete,,138,time_series
+NaturalGas.csv,price,continuous,,114,time_series
+NaturalGas.csv,eprice,continuous,,121,time_series
+NaturalGas.csv,oprice,continuous,,129,time_series
+NaturalGas.csv,lprice,continuous,,113,time_series
+NaturalGas.csv,heating,discrete,,138,time_series
+NaturalGas.csv,income,continuous,,138,time_series
+OECDGas.csv,rownames,discrete,,342,time_series
+OECDGas.csv,country,categorical,,18,time_series
+OECDGas.csv,year,datetime,,19,time_series
+OECDGas.csv,gas,continuous,,342,time_series
+OECDGas.csv,income,continuous,,342,time_series
+OECDGas.csv,price,continuous,,342,time_series
+OECDGas.csv,cars,continuous,,342,time_series
+Online Purchase.csv,Customer_ID,id,,403,transaction
+Online Purchase.csv,Gender,categorical,,2,transaction
+Online Purchase.csv,Age,discrete,,44,transaction
+Online Purchase.csv,Salary,discrete,,120,transaction
+Online Purchase.csv,Purchased,categorical,,2,transaction
+OrangeCounty.csv,rownames,discrete,,76,tabular
+OrangeCounty.csv,employment,continuous,,76,tabular
+OrangeCounty.csv,gnp,continuous,,76,tabular
+Parade2005.csv,rownames,discrete,,130,tabular
+Parade2005.csv,earnings,discrete,,87,tabular
+Parade2005.csv,age,discrete,,42,tabular
+Parade2005.csv,gender,categorical,,2,tabular
+Parade2005.csv,state,text,,50,tabular
+Parade2005.csv,celebrity,categorical,,2,tabular
+PepperPrice.csv,rownames,discrete,,271,tabular
+PepperPrice.csv,black,continuous,,239,tabular
+PepperPrice.csv,white,continuous,,233,tabular
+Placement (1).csv,Student_ID,id,,100,tabular
+Placement (1).csv,CGPA,continuous,,39,tabular
+Placement (1).csv,IQ,discrete,,71,tabular
+Placement (1).csv,Placement,categorical,,2,tabular
+Product Sales Data.csv,Month,categorical,,12,tabular
+Product Sales Data.csv,Cream,discrete,,12,tabular
+Product Sales Data.csv,Detergent,discrete,,12,tabular
+Product Sales Data.csv,Moisturizer,discrete,,12,tabular
+Product Sales Data.csv,Sanitizer,discrete,,12,tabular
+Product Sales Data.csv,Shampoo,discrete,,11,tabular
+Product Sales Data.csv,Soap,discrete,,12,tabular
+Product Sales Data.csv,Total Units,discrete,,12,tabular
+Product Sales Data.csv,Total Profit,discrete,,12,tabular
+Salary Data.csv,Experience Years,continuous,,38,tabular
+Salary Data.csv,Salary,discrete,,40,tabular
+sales_data_sample.csv,ORDERNUMBER,discrete,,307,transaction
+sales_data_sample.csv,QUANTITYORDERED,discrete,,58,transaction
+sales_data_sample.csv,PRICEEACH,continuous,,1016,transaction
+sales_data_sample.csv,ORDERLINENUMBER,discrete,,18,transaction
+sales_data_sample.csv,SALES,continuous,,2763,transaction
+sales_data_sample.csv,ORDERDATE,datetime,mixed,252,transaction
+sales_data_sample.csv,STATUS,categorical,,6,transaction
+sales_data_sample.csv,QTR_ID,categorical,,4,transaction
+sales_data_sample.csv,MONTH_ID,discrete,,12,transaction
+sales_data_sample.csv,YEAR_ID,datetime,,3,transaction
+sales_data_sample.csv,PRODUCTLINE,categorical,,7,transaction
+sales_data_sample.csv,MSRP,discrete,,80,transaction
+sales_data_sample.csv,PRODUCTCODE,text,,109,transaction
+sales_data_sample.csv,CUSTOMERNAME,text,,92,transaction
+sales_data_sample.csv,PHONE,text,,91,transaction
+sales_data_sample.csv,ADDRESSLINE1,text,,92,transaction
+sales_data_sample.csv,ADDRESSLINE2,categorical,,9,transaction
+sales_data_sample.csv,CITY,text,,73,transaction
+sales_data_sample.csv,STATE,categorical,,16,transaction
+sales_data_sample.csv,POSTALCODE,text,,73,transaction
+sales_data_sample.csv,COUNTRY,categorical,,19,transaction
+sales_data_sample.csv,TERRITORY,categorical,,3,transaction
+sales_data_sample.csv,CONTACTLASTNAME,text,,77,transaction
+sales_data_sample.csv,CONTACTFIRSTNAME,text,,72,transaction
+sales_data_sample.csv,DEALSIZE,categorical,,3,transaction
+SAT GPA.csv,SAT,discrete,,75,tabular
+SAT GPA.csv,GPA,continuous,,23,tabular
+ShipAccidents.csv,rownames,discrete,,40,tabular
+ShipAccidents.csv,type,categorical,,5,tabular
+ShipAccidents.csv,construction,categorical,,4,tabular
+ShipAccidents.csv,operation,categorical,,2,tabular
+ShipAccidents.csv,service,discrete,,34,tabular
+ShipAccidents.csv,incidents,discrete,,16,tabular
+Students Performance.csv,gender,categorical,,2,tabular
+Students Performance.csv,race/ethnicity,categorical,,5,tabular
+Students Performance.csv,parental level of education,categorical,,6,tabular
+Students Performance.csv,lunch,categorical,,2,tabular
+Students Performance.csv,test preparation course,categorical,,2,tabular
+Students Performance.csv,math score,discrete,,81,tabular
+Students Performance.csv,reading score,discrete,,72,tabular
+Students Performance.csv,writing score,discrete,,77,tabular
+StudentsPerformance.csv,gender,categorical,,2,tabular
+StudentsPerformance.csv,race/ethnicity,categorical,,5,tabular
+StudentsPerformance.csv,parental level of education,categorical,,6,tabular
+StudentsPerformance.csv,lunch,categorical,,2,tabular
+StudentsPerformance.csv,test preparation course,categorical,,2,tabular
+StudentsPerformance.csv,math score,discrete,,81,tabular
+StudentsPerformance.csv,reading score,discrete,,72,tabular
+StudentsPerformance.csv,writing score,discrete,,77,tabular
+test.csv,"age;""job"";""marital"";""education"";""default"";""balance"";""housing"";""loan"";""contact"";""day"";""month"";""duration"";""campaign"";""pdays"";""previous"";""poutcome"";""y""",text,,4521,tabular
+Titanic.csv,pclass,categorical,,3,tabular
+Titanic.csv,survived,categorical,,2,tabular
+Titanic.csv,name,text,,1307,tabular
+Titanic.csv,sex,categorical,,2,tabular
+Titanic.csv,age,continuous,,98,tabular
+Titanic.csv,sibsp,categorical,,7,tabular
+Titanic.csv,parch,categorical,,8,tabular
+Titanic.csv,ticket,text,,929,tabular
+Titanic.csv,fare,continuous,,281,tabular
+Titanic.csv,cabin,text,,186,tabular
+Titanic.csv,embarked,categorical,,3,tabular
+Titanic.csv,boat,categorical,,27,tabular
+Titanic.csv,body,discrete,,121,tabular
+Titanic.csv,home.dest,text,,369,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Age,discrete,,43,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Attrition,categorical,,2,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,BusinessTravel,categorical,,3,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,DailyRate,discrete,,886,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Department,categorical,,3,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,DistanceFromHome,discrete,,29,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Education,categorical,,5,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,EducationField,categorical,,6,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,EmployeeCount,categorical,,1,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,EmployeeNumber,id,,1470,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,EnvironmentSatisfaction,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Gender,categorical,,2,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,HourlyRate,discrete,,71,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,JobInvolvement,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,JobLevel,categorical,,5,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,JobRole,categorical,,9,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,JobSatisfaction,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,MaritalStatus,categorical,,3,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,MonthlyIncome,discrete,,1349,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,MonthlyRate,discrete,,1427,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,NumCompaniesWorked,categorical,,10,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,Over18,categorical,,1,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,OverTime,categorical,,2,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,PercentSalaryHike,discrete,,15,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,PerformanceRating,categorical,,2,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,RelationshipSatisfaction,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,StandardHours,categorical,,1,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,StockOptionLevel,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,TotalWorkingYears,discrete,,40,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,TrainingTimesLastYear,categorical,,7,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,WorkLifeBalance,categorical,,4,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,YearsAtCompany,discrete,,37,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,YearsInCurrentRole,discrete,,19,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,YearsSinceLastPromotion,discrete,,16,tabular
+WA_Fn-UseC_-HR-Employee-Attrition.csv,YearsWithCurrManager,discrete,,18,tabular
+WeakInstrument.csv,rownames,discrete,,200,tabular
+WeakInstrument.csv,y,continuous,,198,tabular
+WeakInstrument.csv,x,continuous,,197,tabular
+WeakInstrument.csv,z,continuous,,196,tabular
+WomenQueue.csv,rownames,discrete,,11,tabular
+WomenQueue.csv,nWomen,discrete,,11,tabular
+WomenQueue.csv,Freq,categorical,,9,tabular
+World Energy Consumption.csv,country,text,,306,transaction
+World Energy Consumption.csv,year,datetime,,123,transaction
+World Energy Consumption.csv,iso_code,text,,219,transaction
+World Energy Consumption.csv,population,discrete,,18054,transaction
+World Energy Consumption.csv,gdp,discrete,,11113,transaction
+World Energy Consumption.csv,biofuel_cons_change_pct,continuous,,1510,transaction
+World Energy Consumption.csv,biofuel_cons_change_twh,continuous,,1222,transaction
+World Energy Consumption.csv,biofuel_cons_per_capita,continuous,,1498,transaction
+World Energy Consumption.csv,biofuel_consumption,continuous,,1449,transaction
+World Energy Consumption.csv,biofuel_elec_per_capita,continuous,,2619,transaction
+World Energy Consumption.csv,biofuel_electricity,continuous,,1067,transaction
+World Energy Consumption.csv,biofuel_share_elec,continuous,,2097,transaction
+World Energy Consumption.csv,biofuel_share_energy,continuous,,920,transaction
+World Energy Consumption.csv,carbon_intensity_elec,continuous,,4094,transaction
+World Energy Consumption.csv,coal_cons_change_pct,continuous,,4755,transaction
+World Energy Consumption.csv,coal_cons_change_twh,continuous,,4271,transaction
+World Energy Consumption.csv,coal_cons_per_capita,continuous,,4538,transaction
+World Energy Consumption.csv,coal_consumption,continuous,,4912,transaction
+World Energy Consumption.csv,coal_elec_per_capita,continuous,,2775,transaction
+World Energy Consumption.csv,coal_electricity,continuous,,2728,transaction
+World Energy Consumption.csv,coal_prod_change_pct,continuous,,7627,transaction
+World Energy Consumption.csv,coal_prod_change_twh,continuous,,6631,transaction
+World Energy Consumption.csv,coal_prod_per_capita,continuous,,8106,transaction
+World Energy Consumption.csv,coal_production,continuous,,7885,transaction
+World Energy Consumption.csv,coal_share_elec,continuous,,3195,transaction
+World Energy Consumption.csv,coal_share_energy,continuous,,4353,transaction
+World Energy Consumption.csv,electricity_demand,continuous,,3448,transaction
+World Energy Consumption.csv,electricity_generation,continuous,,4874,transaction
+World Energy Consumption.csv,electricity_share_energy,continuous,,3345,transaction
+World Energy Consumption.csv,energy_cons_change_pct,continuous,,9088,transaction
+World Energy Consumption.csv,energy_cons_change_twh,continuous,,9031,transaction
+World Energy Consumption.csv,energy_per_capita,continuous,,10445,transaction
+World Energy Consumption.csv,energy_per_gdp,continuous,,3274,transaction
+World Energy Consumption.csv,fossil_cons_change_pct,continuous,,4180,transaction
+World Energy Consumption.csv,fossil_cons_change_twh,continuous,,4700,transaction
+World Energy Consumption.csv,fossil_elec_per_capita,continuous,,5657,transaction
+World Energy Consumption.csv,fossil_electricity,continuous,,3738,transaction
+World Energy Consumption.csv,fossil_energy_per_capita,continuous,,4214,transaction
+World Energy Consumption.csv,fossil_fuel_consumption,continuous,,4879,transaction
+World Energy Consumption.csv,fossil_share_elec,continuous,,4740,transaction
+World Energy Consumption.csv,fossil_share_energy,continuous,,4292,transaction
+World Energy Consumption.csv,gas_cons_change_pct,continuous,,4534,transaction
+World Energy Consumption.csv,gas_cons_change_twh,continuous,,4545,transaction
+World Energy Consumption.csv,gas_consumption,continuous,,4951,transaction
+World Energy Consumption.csv,gas_elec_per_capita,continuous,,3311,transaction
+World Energy Consumption.csv,gas_electricity,continuous,,3050,transaction
+World Energy Consumption.csv,gas_energy_per_capita,continuous,,4448,transaction
+World Energy Consumption.csv,gas_prod_change_pct,continuous,,6026,transaction
+World Energy Consumption.csv,gas_prod_change_twh,continuous,,5597,transaction
+World Energy Consumption.csv,gas_prod_per_capita,continuous,,6375,transaction
+World Energy Consumption.csv,gas_production,continuous,,6632,transaction
+World Energy Consumption.csv,gas_share_elec,continuous,,3567,transaction
+World Energy Consumption.csv,gas_share_energy,continuous,,4408,transaction
+World Energy Consumption.csv,greenhouse_gas_emissions,continuous,,2546,transaction
+World Energy Consumption.csv,hydro_cons_change_pct,continuous,,4599,transaction
+World Energy Consumption.csv,hydro_cons_change_twh,continuous,,4133,transaction
+World Energy Consumption.csv,hydro_consumption,continuous,,4722,transaction
+World Energy Consumption.csv,hydro_elec_per_capita,continuous,,6173,transaction
+World Energy Consumption.csv,hydro_electricity,continuous,,4788,transaction
+World Energy Consumption.csv,hydro_energy_per_capita,continuous,,4385,transaction
+World Energy Consumption.csv,hydro_share_elec,continuous,,4924,transaction
+World Energy Consumption.csv,hydro_share_energy,continuous,,3914,transaction
+World Energy Consumption.csv,low_carbon_cons_change_pct,continuous,,4595,transaction
+World Energy Consumption.csv,low_carbon_cons_change_twh,continuous,,4422,transaction
+World Energy Consumption.csv,low_carbon_consumption,continuous,,4913,transaction
+World Energy Consumption.csv,low_carbon_elec_per_capita,continuous,,6048,transaction
+World Energy Consumption.csv,low_carbon_electricity,continuous,,4795,transaction
+World Energy Consumption.csv,low_carbon_energy_per_capita,continuous,,4447,transaction
+World Energy Consumption.csv,low_carbon_share_elec,continuous,,5172,transaction
+World Energy Consumption.csv,low_carbon_share_energy,continuous,,4288,transaction
+World Energy Consumption.csv,net_elec_imports,continuous,,1454,transaction
+World Energy Consumption.csv,net_elec_imports_share_demand,continuous,,2943,transaction
+World Energy Consumption.csv,nuclear_cons_change_pct,continuous,,2118,transaction
+World Energy Consumption.csv,nuclear_cons_change_twh,continuous,,2114,transaction
+World Energy Consumption.csv,nuclear_consumption,continuous,,2184,transaction
+World Energy Consumption.csv,nuclear_elec_per_capita,continuous,,2036,transaction
+World Energy Consumption.csv,nuclear_electricity,continuous,,2337,transaction
+World Energy Consumption.csv,nuclear_energy_per_capita,continuous,,2020,transaction
+World Energy Consumption.csv,nuclear_share_elec,continuous,,1951,transaction
+World Energy Consumption.csv,nuclear_share_energy,continuous,,2154,transaction
+World Energy Consumption.csv,oil_cons_change_pct,continuous,,4941,transaction
+World Energy Consumption.csv,oil_cons_change_twh,continuous,,5275,transaction
+World Energy Consumption.csv,oil_consumption,continuous,,5613,transaction
+World Energy Consumption.csv,oil_elec_per_capita,continuous,,5126,transaction
+World Energy Consumption.csv,oil_electricity,continuous,,2580,transaction
+World Energy Consumption.csv,oil_energy_per_capita,continuous,,4959,transaction
+World Energy Consumption.csv,oil_prod_change_pct,continuous,,7668,transaction
+World Energy Consumption.csv,oil_prod_change_twh,continuous,,6697,transaction
+World Energy Consumption.csv,oil_prod_per_capita,continuous,,7946,transaction
+World Energy Consumption.csv,oil_production,continuous,,7962,transaction
+World Energy Consumption.csv,oil_share_elec,continuous,,4253,transaction
+World Energy Consumption.csv,oil_share_energy,continuous,,4507,transaction
+World Energy Consumption.csv,other_renewable_consumption,continuous,,2869,transaction
+World Energy Consumption.csv,other_renewable_electricity,continuous,,2489,transaction
+World Energy Consumption.csv,other_renewable_exc_biofuel_electricity,continuous,,631,transaction
+World Energy Consumption.csv,other_renewables_cons_change_pct,continuous,,3142,transaction
+World Energy Consumption.csv,other_renewables_cons_change_twh,continuous,,2117,transaction
+World Energy Consumption.csv,other_renewables_elec_per_capita,continuous,,3771,transaction
+World Energy Consumption.csv,other_renewables_elec_per_capita_exc_biofuel,continuous,,775,transaction
+World Energy Consumption.csv,other_renewables_energy_per_capita,continuous,,2988,transaction
+World Energy Consumption.csv,other_renewables_share_elec,continuous,,2734,transaction
+World Energy Consumption.csv,other_renewables_share_elec_exc_biofuel,continuous,,735,transaction
+World Energy Consumption.csv,other_renewables_share_energy,continuous,,1649,transaction
+World Energy Consumption.csv,per_capita_electricity,continuous,,6303,transaction
+World Energy Consumption.csv,primary_energy_consumption,continuous,,11333,transaction
+World Energy Consumption.csv,renewables_cons_change_pct,continuous,,4641,transaction
+World Energy Consumption.csv,renewables_cons_change_twh,continuous,,4299,transaction
+World Energy Consumption.csv,renewables_consumption,continuous,,4867,transaction
+World Energy Consumption.csv,renewables_elec_per_capita,continuous,,5833,transaction
+World Energy Consumption.csv,renewables_electricity,continuous,,4400,transaction
+World Energy Consumption.csv,renewables_energy_per_capita,continuous,,4441,transaction
+World Energy Consumption.csv,renewables_share_elec,continuous,,5067,transaction
+World Energy Consumption.csv,renewables_share_energy,continuous,,4127,transaction
+World Energy Consumption.csv,solar_cons_change_pct,continuous,,1760,transaction
+World Energy Consumption.csv,solar_cons_change_twh,continuous,,998,transaction
+World Energy Consumption.csv,solar_consumption,continuous,,1221,transaction
+World Energy Consumption.csv,solar_elec_per_capita,continuous,,1956,transaction
+World Energy Consumption.csv,solar_electricity,continuous,,952,transaction
+World Energy Consumption.csv,solar_energy_per_capita,continuous,,1626,transaction
+World Energy Consumption.csv,solar_share_elec,continuous,,1360,transaction
+World Energy Consumption.csv,solar_share_energy,continuous,,709,transaction
+World Energy Consumption.csv,wind_cons_change_pct,continuous,,2026,transaction
+World Energy Consumption.csv,wind_cons_change_twh,continuous,,1470,transaction
+World Energy Consumption.csv,wind_consumption,continuous,,1741,transaction
+World Energy Consumption.csv,wind_elec_per_capita,continuous,,2211,transaction
+World Energy Consumption.csv,wind_electricity,continuous,,1394,transaction
+World Energy Consumption.csv,wind_energy_per_capita,continuous,,1998,transaction
+World Energy Consumption.csv,wind_share_elec,continuous,,1790,transaction
+World Energy Consumption.csv,wind_share_energy,continuous,,1112,transaction
+WorldCupMatches.csv,Year,datetime,,20,time_series
+WorldCupMatches.csv,Datetime,datetime,mixed,602,time_series
+WorldCupMatches.csv,Stage,categorical,,23,time_series
+WorldCupMatches.csv,Stadium,text,,181,time_series
+WorldCupMatches.csv,City,text,,151,time_series
+WorldCupMatches.csv,Home Team Name,text,,78,time_series
+WorldCupMatches.csv,Home Team Goals,discrete,,11,time_series
+WorldCupMatches.csv,Away Team Goals,categorical,,7,time_series
+WorldCupMatches.csv,Away Team Name,text,,83,time_series
+WorldCupMatches.csv,Win conditions,categorical,,43,time_series
+WorldCupMatches.csv,Attendance,discrete,,622,time_series
+WorldCupMatches.csv,Half-time Home Goals,categorical,,7,time_series
+WorldCupMatches.csv,Half-time Away Goals,categorical,,6,time_series
+WorldCupMatches.csv,Referee,text,,366,time_series
+WorldCupMatches.csv,Assistant 1,text,,387,time_series
+WorldCupMatches.csv,Assistant 2,text,,408,time_series
+WorldCupMatches.csv,RoundID,discrete,,101,time_series
+WorldCupMatches.csv,MatchID,discrete,,836,time_series
+WorldCupMatches.csv,Home Team Initials,text,,77,time_series
+WorldCupMatches.csv,Away Team Initials,text,,82,time_series
