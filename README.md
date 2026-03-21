@@ -66,9 +66,3 @@ cd frontend
 npm install
 npm run dev
 ```
-*Dashboard will be available at http://localhost:5173*
-
----
-
-## 📝 License
-This project is licensed under the MIT License.
