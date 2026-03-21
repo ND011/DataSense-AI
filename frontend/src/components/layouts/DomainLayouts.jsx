@@ -25,8 +25,8 @@ export const FinanceLayout = ({ data, kpis, allCharts, domainConfig, renderChart
     const pieCharts = allCharts.filter(c => c.chart_type === 'pie');
     
     // Pick the most relevant charts for the top slots
-    const mainBar = barCharts[0] || allCharts.find(c => c.chart_type !== 'pie');
-    const mainPie = pieCharts[0] || allCharts.find(c => c !== mainBar);
+    const mainBar = barCharts[0] || allCharts.find(c => c.chart_type !== 'pie') || allCharts[0];
+    const mainPie = pieCharts[0] || allCharts.find(c => c !== mainBar) || allCharts[1] || allCharts[0];
     const otherCharts = allCharts.filter(c => c !== mainBar && c !== mainPie && c.chart_type !== 'geo_map');
 
     return (
@@ -100,8 +100,8 @@ export const MarketingLayout = ({ data, kpis, allCharts, domainConfig, renderCha
     const areaCharts = allCharts.filter(c => c.chart_type === 'area' || c.chart_type === 'line');
     const pieCharts = allCharts.filter(c => c.chart_type === 'pie');
     
-    const mainTraffic = areaCharts[0] || allCharts.find(c => c.chart_type !== 'pie' && c.chart_type !== 'scatter');
-    const sourcePie = pieCharts[0];
+    const mainTraffic = areaCharts[0] || allCharts.find(c => c.chart_type !== 'pie' && c.chart_type !== 'scatter') || allCharts[0];
+    const sourcePie = pieCharts[0] || allCharts.find(c => c !== mainTraffic) || allCharts[1];
     const restCharts = allCharts.filter(c => c !== mainTraffic && c !== sourcePie && c.chart_type !== 'geo_map');
 
     return (
@@ -210,7 +210,7 @@ export const HealthcareLayout = ({ data, kpis, allCharts, domainConfig, renderCh
     
     // Pick relevant charts
     const mainBar = barCharts[0] || allCharts[0];
-    const secondaryChart = medicalCharts[0] || allCharts[1];
+    const secondaryChart = medicalCharts[0] || allCharts.find(c => c !== mainBar) || allCharts[1];
     const restCharts = allCharts.filter(c => c !== mainBar && c !== secondaryChart && c.chart_type !== 'geo_map');
 
     // Helper to extract numeric part for calculations
@@ -315,7 +315,7 @@ export const CustomerServiceLayout = ({ data, kpis, allCharts, domainConfig, ren
     // Dark mode, heavy focus on left/right split and text feedback
     const lineCharts = allCharts.filter(c => c.chart_type === 'line' || c.chart_type === 'area');
     const mainChart = lineCharts[0] || allCharts[0];
-    const sideChart = allCharts.find(c => c !== mainChart && c.chart_type !== 'geo_map');
+    const sideChart = allCharts.find(c => c !== mainChart && c.chart_type !== 'geo_map') || allCharts[1];
 
     // Helper to get numeric value safely to fix NaN error
     const getNumVal = (val) => {

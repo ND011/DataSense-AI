@@ -58,6 +58,10 @@ def train_predictive_model(df, schema):
     if not target_col:
         return None
     
+    # 🏎️ Speed Optimization: Sample large datasets for quick analytical preview
+    if len(df) > 5000:
+        df = df.sample(n=5000, random_state=42)
+        
     # Prepare features: all other numeric columns (excluding target)
     feature_cols = [c for c in numeric_cols if c != target_col]
     if not feature_cols:
@@ -93,7 +97,8 @@ def train_predictive_model(df, schema):
             # ── Classification Path ──
             models = {
                 "LogisticRegression": LogisticRegression(max_iter=1000, random_state=42),
-                "RandomForestClassifier": RandomForestClassifier(n_estimators=50, random_state=42)
+                # Explicitly set n_jobs=1 to prevent Windows multiprocessing spawn errors
+                "RandomForestClassifier": RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=1)
             }
             
             best_score = -1
@@ -139,7 +144,8 @@ def train_predictive_model(df, schema):
                 
         else:
             # ── Regression Path ──
-            model = RandomForestRegressor(n_estimators=50, random_state=42)
+            # Explicitly set n_jobs=1 to prevent Windows multiprocessing spawn errors
+            model = RandomForestRegressor(n_estimators=50, random_state=42, n_jobs=1)
             model.fit(X_train, y_train)
             preds = model.predict(X_test)
             

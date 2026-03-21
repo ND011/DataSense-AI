@@ -30,13 +30,14 @@ class OllamaService:
                 "options": {"temperature": 0.1}
             }
             
-            response = requests.post(self.base_url, json=payload, timeout=5)
+            response = requests.post(self.base_url, json=payload, timeout=8) # Increased for stability
             if response.status_code == 200:
                 detected_domain = response.json().get("response", "").strip()
                 return {"domain": detected_domain, "source": "AI Semantic Analysis"}
             
             return None
-        except Exception:
+        except Exception as e:
+            # Silence domain errors to speed up main pipeline
             return None
 
     def generate_insight(self, context_data=None, domain: str = "General Business", **kwargs) -> str:
@@ -70,16 +71,19 @@ class OllamaService:
                     "raw_sample": {json.dumps(sample)}
                 }}
                 
-                Perform a deep analytical synthesis (Target: 150-300 words). 
-                Focus on "Structural First Principles" (Pareto effects, variance clusters, and growth momentum).
-                You MUST establish deep logical connections between disparate data points.
+                Perform a concise analytical synthesis (Target: 150 words). 
+                Focus on high-impact regularities. You MUST establish logical connections between metrics.
                 
-                Structure your response into FOUR clear, substantial segments:
-                1. THE CORE NARRATIVE: Synthesize the current state. 
-                2. PREDICTIVE SYNTHESIS: Focus on the 'predictive_model'.
-                   CRITICAL: If Accuracy/R2 is > 0.99, call it out as a "Potential Bias/Structural Anomaly" and warn about data leakage.
-                3. THE STRATEGIC 'SO WHAT?': What are the secondary consequences or hidden risks?
-                4. ACTIONABLE FORESIGHT: Provide a specific, non-obvious move.
+                Your response must follow this EXACT format with these headers:
+                [EXECUTIVE SUMMARY]
+                (Write 100 words here)
+                
+                [STRATEGIC ACTION PLAN]
+                - (Direct move 1)
+                - (Direct move 2)
+                - (Direct move 3)
+                - (Direct move 4)
+                - (Direct move 5)
                 """
             
             system_persona = kwargs.get('system_persona', "You are an Elite Strategic Advisor and Zero-Shot Data Synthesis expert.")
@@ -91,7 +95,7 @@ class OllamaService:
                 "options": {"temperature": 0.8, "num_predict": 500}
             }
             
-            response = requests.post(self.base_url, json=payload, timeout=12)
+            response = requests.post(self.base_url, json=payload, timeout=120) # 2-minute window for bulletproof results
             
             if response.status_code == 200:
                 return response.json().get("response", "").strip()
@@ -101,10 +105,41 @@ class OllamaService:
                 return f"Structural Analysis: The detected variance in '{ctx.get('predictions', {}).get('target', 'primary drivers')}' indicates a non-linear growth momentum. In a {dom} context, this suggests the 'Vital Few' features are successfully anchoring the data core while secondary fluctuations remain isolated."
             return self._get_fallback_insight(dom, ctx)
                 
-        except Exception:
+        except Exception as e:
+            print(f"Ollama Connection Error (Insight): {str(e)}")
             if prompt_override:
                 return f"Pattern Recognition: Analyzing {dom} trajectories reveal a stable architectural pulse. The intersection of variance and categorical density suggests a high-integrity data spine with localized optimization opportunities."
             return self._get_fallback_insight(dom, ctx)
+
+    def ask(self, question: str, data_context: dict) -> str:
+        """Allows direct querying about the dataset."""
+        prompt = f"""
+        CONTEXT:
+        - Domain: {data_context.get('domain', 'Unknown')}
+        - Rows: {data_context.get('rows', 'Unknown')}
+        - Column Summary: {json.dumps(data_context.get('schema', {}))}
+        - Recent Sample: {json.dumps(data_context.get('sample', []))}
+        
+        QUESTION:
+        {question}
+        
+        Provide a precise, data-backed answer based on the provided context.
+        If the question cannot be answered from the data, explain why.
+        """
+        
+        try:
+            payload = {
+                "model": self.model,
+                "prompt": prompt,
+                "stream": False,
+                "options": {"temperature": 0.5}
+            }
+            response = requests.post(self.base_url, json=payload, timeout=12)
+            if response.status_code == 200:
+                return response.json().get("response", "").strip()
+            return "I'm having trouble connecting to the logic engine right now. Please try again."
+        except Exception as e:
+            return f"Error contacting AI: {str(e)}"
 
     def _get_fallback_insight(self, domain: str, context_data: dict = None) -> str:
         """Generates a high-quality, structured statistical synthesis when Ollama is unavailable."""
@@ -114,7 +149,7 @@ class OllamaService:
             # Try to secondary search if nested
             rows = ctx.get('summary', {}).get('rows', 'N/A')
             
-        predictions = ctx.get('predictions', {})
+        predictions = ctx.get('predictions') or {}
         perf = predictions.get('performance') or {}
         acc = perf.get('r2', 0) if isinstance(perf, dict) else 0
         
