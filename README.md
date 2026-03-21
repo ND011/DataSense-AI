@@ -58,7 +58,6 @@ cd backend
 pip install fastapi uvicorn pandas openpyxl
 python main.py
 ```
-*API will be available at http://localhost:8000*
 
 ### 3. Setup Frontend
 ```bash
