@@ -1,0 +1,16 @@
+{
+  "dataset_summary": {
+    "rows": 14,
+    "columns": 2
+  },
+  "column_types": {
+    "IATA_CODE": "id",
+    "AIRLINE": "id"
+  },
+  "statistics": {},
+  "trends": {},
+  "correlations": [],
+  "anomalies": {},
+  "growth_analysis": {},
+  "chart_recommendations": []
+}

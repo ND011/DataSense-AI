@@ -1,0 +1,11 @@
+Patient_ID,Age,BMI,HeartRate,Diagnosis
+P001,25,22.5,70,Normal
+P002,30,24.1,72,Normal
+P003,45,28.4,85,Risk
+P004,50,31.2,90,High
+P005,22,21.0,68,Normal
+P006,60,26.5,75,Risk
+P007,35,23.5,71,Normal
+P008,40,29.1,82,Risk
+P009,55,32.4,95,High
+P010,28,24.5,73,Normal

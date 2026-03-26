@@ -1,0 +1,26 @@
+Country,State,City,Latitude,Longitude,Sales,Profit,Customer_Segment
+USA,California,San Francisco,37.7749,-122.4194,1500,450,Premium
+USA,New York,New York City,40.7128,-74.0060,2500,800,Premium
+USA,Texas,Austin,30.2672,-97.7431,1200,300,Standard
+USA,Florida,Miami,25.7617,-80.1918,1800,500,Standard
+UK,England,London,51.5074,-0.1278,2200,700,Premium
+UK,Scotland,Edinburgh,55.9533,-3.1883,900,200,Standard
+Germany,Berlin,Berlin,52.5200,13.4050,1600,450,Premium
+Germany,Bavaria,Munich,48.1351,11.5820,1300,350,Standard
+France,Ile-de-France,Paris,48.8566,2.3522,2100,650,Premium
+France,PACA,Marseille,43.2965,5.3698,800,150,Standard
+India,Maharashtra,Mumbai,19.0760,72.8777,3200,1200,Premium
+India,Karnataka,Bangalore,12.9716,77.5946,2800,900,Premium
+India,Delhi,New Delhi,28.6139,77.2090,2600,850,Premium
+Japan,Tokyo,Tokyo,35.6895,139.6917,2900,1100,Premium
+Japan,Osaka,Osaka,34.6937,135.5023,1700,550,Standard
+Brazil,Sao Paulo,Sao Paulo,-23.5505,-46.6333,1400,400,Standard
+Brazil,Rio de Janeiro,Rio de Janeiro,-22.9068,-43.1729,1100,250,Standard
+Australia,NSW,Sydney,-33.8688,151.2093,1900,600,Premium
+Australia,Victoria,Melbourne,-37.8136,144.9631,1500,450,Standard
+Canada,Ontario,Toronto,43.6532,-79.3832,2000,700,Premium
+Canada,BC,Vancouver,49.2827,-123.1207,1400,400,Standard
+China,Shanghai,Shanghai,31.2304,121.4737,3500,1300,Premium
+China,Beijing,Beijing,39.9042,116.4074,3100,1150,Premium
+United Arab Emirates,Dubai,Dubai,25.2048,55.2708,2400,800,Premium
+Singapore,Singapore,Singapore,1.3521,103.8198,2300,750,Premium
