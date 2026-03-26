@@ -7,29 +7,50 @@ import {
   Marker
 } from "react-simple-maps";
 import { scaleLinear, scaleSqrt } from "d3-scale";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip as RechartsTooltip,
+  ResponsiveContainer,
+  Cell
+} from "recharts";
 import { feature } from "topojson-client";
-import { Globe, Info, Plus, Minus, Maximize2, ChevronDown } from "lucide-react";
+import { Globe, Info, Plus, Minus, Maximize2, ChevronDown, Calendar, BarChart3 } from "lucide-react";
 
 // World TopoJSON URL
 const geoUrl = "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
 // Name Normalization Map
 const countryAliases = {
-  "usa": "united states of america",
-  "united states": "united states of america",
-  "us": "united states of america",
-  "uk": "united kingdom",
-  "u.k.": "united kingdom",
-  "britain": "united kingdom",
-  "uae": "united arab emirates",
-  "russia": "russian federation",
-  "korea": "south korea",
-  "s. korea": "south korea",
-  "vietnam": "viet nam",
+  // North America
+  "usa": "united states of america", "us": "united states of america", "united states": "united states of america",
+  "u.s.": "united states of america", "u.s.a.": "united states of america",
+  "can": "canada", "mex": "mexico",
+  // Europe
+  "uk": "united kingdom", "u.k.": "united kingdom", "britain": "united kingdom", "england": "united kingdom", "gbr": "united kingdom",
+  "fra": "france", "deu": "germany", "ger": "germany", "ita": "italy", "esp": "spain", "nld": "netherlands", "che": "switzerland",
+  "rus": "russian federation", "russia": "russian federation", "ukr": "ukraine", "pol": "poland", "swe": "sweden", "nor": "norway",
+  // Asia
+  "ind": "india", "chn": "china", "jpn": "japan", "kor": "south korea", "s. korea": "south korea", "korea": "south korea",
+  "tha": "thailand", "vnm": "viet nam", "vietnam": "viet nam", "idn": "indonesia", "phl": "philippines", "mys": "malaysia",
+  "sgp": "singapore", "twn": "taiwan", "pak": "pakistan", "bgd": "bangladesh", "tur": "turkey", "are": "united arab emirates", "uae": "united arab emirates",
+  "sau": "saudi arabia", "isr": "israel",
+  // Oceania
+  "aus": "australia", "nzl": "new zealand",
+  // Latin America
+  "bra": "brazil", "arg": "argentina", "col": "colombia", "chl": "chile", "per": "peru", "ven": "venezuela",
+  // Africa
+  "zaf": "south africa", "egy": "egypt", "nga": "nigeria", "ken": "kenya", "eth": "ethiopia", "mar": "morocco",
+  // Misc variations
+  "the netherlands": "netherlands",
+  "the united states": "united states of america",
   "czechia": "czech republic",
   "tanzania": "united republic of tanzania",
-  "congo": "dem. rep. congo",
-  "drc": "dem. rep. congo",
+  "congo": "dem. rep. congo", "drc": "dem. rep. congo",
+  "ivory coast": "côte d'ivoire",
 };
 
 // Common Country Centroids for Bubbles (fallback if no lat/lon in data)
@@ -55,10 +76,29 @@ const countryCentroids = {
   "singapore": [103.8198, 1.3521],
 };
 
+// Smart City-to-Country Mapping for "Highlight Country via City" logic
+const cityToCountry = {
+  // World Cup / Common Cities
+  "montevideo": "uruguay", "rome": "italy", "paris": "france", "berlin": "germany", "london": "united kingdom",
+  "new york": "united states of america", "chicago": "united states of america", "los angeles": "united states of america",
+  "madrid": "spain", "barcelona": "spain", "mexico city": "mexico", "rio de janeiro": "brazil", "sao paulo": "brazil",
+  "buenos aires": "argentina", "tokyo": "japan", "seoul": "south korea", "munich": "germany", "moscow": "russian federation",
+  "beijing": "china", "shanghai": "china", "mumbai": "india", "delhi": "india", "sydney": "australia", "melbourne": "australia",
+  "toronto": "canada", "vancouver": "canada", "dubai": "united arab emirates", "abu dhabi": "united arab emirates",
+  "johannesburg": "south africa", "cairo": "egypt", "nairobi": "kenya", "casablanca": "morocco",
+  "pasadena": "united states of america", "foxborough": "united states of america", "stanford": "united states of america",
+  "dallas": "united states of america", "orlando": "united states of america", "pontiac": "united states of america",
+  "east rutherford": "united states of america", "detroit": "united states of america", "washington": "united states of america",
+  "yokohama": "japan", "osaka": "japan", "saitama": "japan"
+};
+
 const normalizeName = (name) => {
   if (!name) return "";
-  const low = name.toLowerCase().trim();
-  return countryAliases[low] || low;
+  let low = name.toString().toLowerCase().trim().replace(/[\.\,]/g, '');
+  // Remove "the " prefix if it exists
+  if (low.startsWith("the ")) low = low.slice(4);
+  // Tiered check: Alias -> City-to-Country -> Direct
+  return countryAliases[low] || cityToCountry[low] || low;
 };
 
 const formatValue = (val, metric) => {
@@ -73,8 +113,33 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
   const [topoData, setTopoData] = useState(null);
   const [selectedMetric, setSelectedMetric] = useState("");
+  const [selectedTime, setSelectedTime] = useState("All Time");
   const [tooltip, setTooltip] = useState({ content: null, x: 0, y: 0 });
-  
+
+  // 0. Detect Time/Year column automatically
+  const timeColumn = useMemo(() => {
+    if (!data || data.length === 0) return null;
+    const keys = Object.keys(data[0]);
+    const timeKeywords = ['year', 'time', 'date', 'yr', 'period', 'month', 'quarter', 'dt'];
+    return keys.find(k => timeKeywords.includes(k.toLowerCase()));
+  }, [data]);
+
+  // Extract unique time periods if available
+  const timePeriods = useMemo(() => {
+    if (!timeColumn) return [];
+    const times = new Set();
+    data.forEach(d => {
+      if (d[timeColumn]) times.add(String(d[timeColumn]));
+    });
+    return Array.from(times).sort((a, b) => a - b);
+  }, [data, timeColumn]);
+
+  // Filter data by selected time
+  const filteredData = useMemo(() => {
+    if (selectedTime === "All Time" || !timeColumn) return data;
+    return data.filter(d => String(d[timeColumn]) === selectedTime);
+  }, [data, selectedTime, timeColumn]);
+
   // 1. Detect all numeric attributes automatically
   const metrics = useMemo(() => {
     if (!data || data.length === 0) return [];
@@ -92,10 +157,27 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
     const geoKeywords = ['country', 'state', 'province', 'region', 'city', 'district', 'location', 'zip', 'postal', 'town', 'county'];
     return keys.filter(key => {
       const lowerKey = key.toLowerCase();
-      return (geoKeywords.some(kw => lowerKey.includes(kw)) || typeof data[0][key] === 'string') && 
-             !['lat', 'lon', 'latitude', 'longitude'].includes(lowerKey);
+      return (geoKeywords.some(kw => lowerKey.includes(kw)) || typeof data[0][key] === 'string') &&
+        !['lat', 'lon', 'latitude', 'longitude'].includes(lowerKey);
     });
   }, [data]);
+
+  // Top 10 Data for Side Chart
+  const top10Data = useMemo(() => {
+    if (!selectedMetric || !filteredData) return [];
+    
+    // Find the best dimension name
+    const nameCol = geoDimensions.find(col => ['country', 'location', 'nation'].includes(col.toLowerCase())) || geoDimensions[0];
+    if (!nameCol) return [];
+
+    return [...filteredData]
+      .sort((a, b) => (b[selectedMetric] || 0) - (a[selectedMetric] || 0))
+      .slice(0, 10)
+      .map(d => ({
+        name: d[nameCol],
+        value: d[selectedMetric]
+      }));
+  }, [filteredData, selectedMetric, geoDimensions]);
 
   // 2b. Detect Coordinate Columns
   const coordCols = useMemo(() => {
@@ -127,7 +209,7 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
   };
 
   const handleZoomOut = () => {
-    if (position.zoom <= 1) return;
+    if (position.zoom <= 0.5) return;
     setPosition((pos) => ({ ...pos, zoom: pos.zoom / 1.5 }));
   };
 
@@ -138,13 +220,13 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
   // 4. Dynamic Scales
   const metricStats = useMemo(() => {
     if (!selectedMetric) return { max: 1 };
-    const vals = data.map(d => d[selectedMetric]).filter(v => v !== undefined && v !== null);
+    const vals = filteredData.map(d => d[selectedMetric]).filter(v => v !== undefined && v !== null);
     return { max: vals.length > 0 ? Math.max(...vals) : 1 };
-  }, [data, selectedMetric]);
+  }, [filteredData, selectedMetric]);
 
   const colorScale = scaleLinear()
     .domain([0, metricStats.max])
-    .range(["#f8fafc", accentColor]); 
+    .range(["#E2E8F0", accentColor]);
 
   const bubbleScale = scaleSqrt()
     .domain([0, metricStats.max])
@@ -153,14 +235,14 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
   // Mapping for quick lookup - finds the best geo column for matching
   const dataMapping = useMemo(() => {
     const map = {};
-    if (!data) return map;
+    if (!filteredData) return map;
 
     // Ordered list of priority columns to use for mapping to world map
     const priorityCols = ['country', 'location', 'nation'];
     const fallbackCols = geoDimensions.filter(col => !priorityCols.includes(col.toLowerCase()));
     const allSearchCols = [...priorityCols, ...fallbackCols];
 
-    data.forEach(d => {
+    filteredData.forEach(d => {
       // Find the first column in d that has a value we can map
       for (const col of allSearchCols) {
         if (d[col]) {
@@ -173,10 +255,10 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
       }
     });
     return map;
-  }, [data, geoDimensions]);
+  }, [filteredData, geoDimensions]);
 
   return (
-    <div className="relative w-full h-[650px] bg-white rounded-2xl overflow-hidden flex flex-col group/map border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-md">
+    <div className="relative w-full h-[700px] bg-[#fdfdfd] rounded-2xl overflow-hidden flex flex-col group/map border border-slate-200 shadow-sm transition-all duration-300 hover:shadow-md">
       {/* Premium Header with Selector */}
       <div className="absolute top-0 left-0 right-0 z-20 p-6 flex items-center justify-between bg-white/80 backdrop-blur-md border-b border-slate-100">
         <div className="flex flex-col">
@@ -185,18 +267,77 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
         </div>
 
         <div className="flex items-center gap-4">
-          <div className="relative group/select">
-            <select 
-              value={selectedMetric}
-              onChange={(e) => setSelectedMetric(e.target.value)}
-              className="appearance-none bg-slate-50 border border-slate-200 text-slate-800 text-sm font-bold py-2.5 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-200 cursor-pointer transition-all hover:bg-slate-100 min-w-[200px]"
-            >
-              {metrics.map(m => (
-                <option key={m} value={m}>{m.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</option>
-              ))}
-            </select>
-            <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none group-hover/select:text-slate-600 transition-colors" />
-          </div>
+          {timePeriods.length > 1 && (
+            <div className="relative group/time flex items-center gap-2">
+              <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter whitespace-nowrap">Timeline: {timeColumn}</span>
+              <div className="relative">
+                <select
+                  value={selectedTime}
+                  onChange={(e) => setSelectedTime(e.target.value)}
+                  className="appearance-none bg-blue-50 border border-blue-100 text-blue-600 text-sm font-black py-2.5 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200 cursor-pointer transition-all hover:bg-blue-100 min-w-[120px]"
+                >
+                  <option value="All Time">All {timeColumn}s</option>
+                  {timePeriods.map(t => (
+                    <option key={t} value={t}>{t}</option>
+                  ))}
+                </select>
+                <Calendar className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-400 pointer-events-none" />
+              </div>
+            </div>
+          )}
+
+          {metrics.length > 1 && (
+            <div className="relative group/select">
+              <select
+                value={selectedMetric}
+                onChange={(e) => setSelectedMetric(e.target.value)}
+                className="appearance-none bg-slate-50 border border-slate-200 text-slate-800 text-sm font-bold py-2.5 pl-4 pr-10 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-200 cursor-pointer transition-all hover:bg-slate-100 min-w-[200px]"
+              >
+                {metrics.map(m => (
+                  <option key={m} value={m}>{m.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none group-hover/select:text-slate-600 transition-colors" />
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Side Insights Panel */}
+      <div className="absolute top-28 right-6 z-10 w-72 bg-white/90 backdrop-blur-md border border-slate-200 rounded-2xl p-4 shadow-xl pointer-events-auto transition-all duration-500 group-hover/map:translate-x-0 translate-x-4 opacity-0 group-hover/map:opacity-100">
+        <div className="flex items-center justify-between mb-4">
+          <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Top Performances</h4>
+          <BarChart3 className="w-4 h-4 text-slate-400" />
+        </div>
+        
+        <div className="h-48 w-full">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={top10Data} layout="vertical" margin={{ top: 0, right: 20, left: -20, bottom: 0 }}>
+              <XAxis type="number" hide />
+              <YAxis 
+                type="category" 
+                dataKey="name" 
+                tick={{ fill: '#64748b', fontSize: 9, fontWeight: 700 }} 
+                width={80} 
+                axisLine={false}
+                tickLine={false}
+              />
+              <Bar dataKey="value" fill={accentColor} radius={[0, 4, 4, 0]} barSize={12}>
+                {top10Data.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={accentColor} fillOpacity={1 - (index * 0.08)} />
+                ))}
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="mt-4 pt-4 border-t border-slate-100 space-y-2">
+          {top10Data.slice(0, 3).map((d, i) => (
+            <div key={i} className="flex items-center justify-between">
+              <span className="text-[10px] font-bold text-slate-500 truncate max-w-[120px]">{d.name}</span>
+              <span className="text-[10px] font-black text-slate-900">{formatValue(d.value)}</span>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -214,11 +355,11 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
       </div>
 
       {/* Map Implementation */}
-      <div className="flex-1 relative flex items-center justify-center bg-slate-50/30 pt-20">
+      <div className="flex-1 relative flex items-center justify-center bg-[#F1F5F9] pt-20">
         <ComposableMap
-          projectionConfig={{ scale: 190 }}
+          projectionConfig={{ scale: 220 }}
           width={800}
-          height={400}
+          height={500}
           style={{ width: "100%", height: "100%" }}
         >
           <ZoomableGroup
@@ -226,7 +367,7 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
             center={position.coordinates}
             onMoveEnd={setPosition}
             maxZoom={8}
-            minZoom={1}
+            minZoom={0.5}
           >
             <Geographies geography={topoData || geoUrl}>
               {({ geographies }) =>
@@ -234,7 +375,7 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
                   const countryName = geo.properties.name.toLowerCase();
                   const d = dataMapping[countryName];
                   const value = d ? d[selectedMetric] : null;
-                  
+
                   return (
                     <Geography
                       key={geo.rsmKey}
@@ -257,18 +398,18 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
                       onMouseLeave={() => setTooltip({ content: null, x: 0, y: 0 })}
                       style={{
                         default: {
-                          fill: value !== null && value !== undefined ? colorScale(value) : "#f8fafc",
+                          fill: d ? colorScale(value || 0) : "#F1F5F9",
                           outline: "none",
-                          stroke: "#e2e8f0",
-                          strokeWidth: 0.5,
-                          transition: "fill 300ms ease"
+                          stroke: d ? accentColor : "#CBD5E1",
+                          strokeWidth: d ? 1.2 : 0.5,
+                          transition: "all 300ms ease"
                         },
                         hover: {
                           fill: accentColor,
-                          fillOpacity: 0.8,
+                          fillOpacity: 1,
                           outline: "none",
-                          stroke: "#94a3b8",
-                          strokeWidth: 0.8,
+                          stroke: "#fff",
+                          strokeWidth: 2,
                           cursor: d ? "pointer" : "default"
                         }
                       }}
@@ -278,66 +419,15 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
               }
             </Geographies>
 
-            {/* Universal Bubble Layer */}
-            {data.map((d, i) => {
-              let coords = null;
-              
-              // Case 1: Direct Lat/Lon provided
-              if (coordCols.lat && coordCols.lon && d[coordCols.lat] && d[coordCols.lon]) {
-                coords = [parseFloat(d[coordCols.lon]), parseFloat(d[coordCols.lat])];
-              } 
-              // Case 2: Mapping from Country/Region name
-              else {
-                const locCols = ['country', 'location', 'state', 'city'];
-                for (const col of locCols) {
-                   if (d[col]) {
-                     const norm = normalizeName(d[col]);
-                     if (countryCentroids[norm]) {
-                       coords = countryCentroids[norm];
-                       break;
-                     }
-                   }
-                }
-              }
-
-              if (!coords) return null;
-              const val = d[selectedMetric];
-              if (val === undefined || val === null || val <= 0) return null;
-
-              return (
-                <Marker key={`marker-${i}`} coordinates={coords}>
-                   <circle
-                     r={bubbleScale(val)}
-                     fill={accentColor}
-                     fillOpacity={0.5}
-                     stroke={accentColor}
-                     strokeWidth={1}
-                     className="transition-all duration-500 cursor-pointer hover:fill-opacity-80"
-                     onMouseEnter={(event) => {
-                       setTooltip({
-                         content: d,
-                         x: event.clientX,
-                         y: event.clientY,
-                         name: d.country || d.location || d.city || "Location Data"
-                       });
-                     }}
-                     onMouseMove={(event) => {
-                       setTooltip(prev => ({ ...prev, x: event.clientX, y: event.clientY }));
-                     }}
-                     onMouseLeave={() => setTooltip({ content: null, x: 0, y: 0 })}
-                   />
-                </Marker>
-              );
-            })}
           </ZoomableGroup>
         </ComposableMap>
 
         {/* Enhanced Multi-Attribute Tooltip */}
         {tooltip.content && (
-          <div 
+          <div
             className="fixed z-[100] pointer-events-none bg-white border border-slate-200 p-5 rounded-2xl shadow-2xl min-w-[240px] animate-in fade-in zoom-in duration-200"
-            style={{ 
-              left: tooltip.x + 15, 
+            style={{
+              left: tooltip.x + 15,
               top: tooltip.y + 15,
               transform: "translate(0, 0)"
             }}
@@ -352,7 +442,7 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
                   <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">Global Data Hub</p>
                 </div>
               </div>
-              
+
               <div className="space-y-4">
                 {/* 1. Geographic Details Section */}
                 {geoDimensions.length > 0 && (
@@ -371,7 +461,10 @@ const GeoMap = ({ data, accentColor = "#0284c7", title = "Car Sales Analysis", c
 
                 {/* 2. Numeric Metrics Section */}
                 <div>
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2 px-1">Performance Metrics</p>
+                  <div className="flex items-center justify-between mb-2 px-1">
+                    <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Performance Metrics</p>
+                  </div>
+
                   <div className="grid grid-cols-1 gap-1.5">
                     {metrics.map(m => (
                       <div key={m} className={`flex items-center justify-between gap-10 px-3 py-2 rounded-xl border ${m === selectedMetric ? 'bg-slate-900 border-slate-900 shadow-sm' : 'bg-white border-slate-100'}`}>

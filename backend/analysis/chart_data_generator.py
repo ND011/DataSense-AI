@@ -86,35 +86,78 @@ def generate_chart_data(df, chart, stats):
             df[y_col] = pd.to_numeric(df[y_col], errors='coerce')
             
             temp_df = df.copy()
-            temp_df[x_col] = pd.to_datetime(temp_df[x_col], errors='coerce')
-            temp_df = temp_df.dropna(subset=[x_col, y_col])
             
-            if agg_type == "event_rate":
-                # STEP 9: Binary Time-Series Simulation
-                # Compute event rate per month: event_rate = mean(binary)
-                temp_df = temp_df.set_index(x_col)
-                monthly = temp_df[y_col].resample('M').mean().reset_index()
-                monthly.columns = [x_col, y_col]
-                for _, row in monthly.iterrows():
-                    chart_data.append({
-                        "name": str(row[x_col].strftime('%Y-%m')),
-                        "value": round(float(row[y_col]) * 100, 2)  # Convert to percentage
-                    })
+            # Smart Date Detection: Only coerce to datetime if the column looks like a date/time
+            is_date_like = "date" in x_col.lower() or "time" in x_col.lower() or "year" in x_col.lower() or "month" in x_col.lower()
+            if not is_date_like:
+                # Check sample of values for date-like strings
+                sample = temp_df[x_col].dropna().head(10).astype(str)
+                if any(any(c in s for c in ['-', '/', ':']) for s in sample):
+                    is_date_like = True
+
+            if is_date_like:
+                temp_df[x_col] = pd.to_datetime(temp_df[x_col], errors='coerce')
+                temp_df = temp_df.dropna(subset=[x_col, y_col])
+                
+                if agg_type == "event_rate":
+                    temp_df = temp_df.set_index(x_col)
+                    monthly = temp_df[y_col].resample('ME').mean().reset_index()
+                    monthly.columns = [x_col, y_col]
+                    for _, row in monthly.iterrows():
+                        chart_data.append({
+                            "name": str(row[x_col].strftime('%Y-%m')),
+                            "value": round(float(row[y_col]) * 100, 2)
+                        })
+                else:
+                    try:
+                        agg = temp_df.groupby(x_col)[y_col].mean().reset_index()
+                        agg = agg.sort_values(x_col)
+                        
+                        # Sample if too many points
+                        if len(agg) > 100:
+                            agg = agg.iloc[::len(agg)//100]
+                        
+                        # Determine label format based on range
+                        min_date = agg[x_col].min()
+                        max_date = agg[x_col].max()
+                        time_delta = max_date - min_date
+                        
+                        has_time_variation = agg[x_col].dt.hour.nunique() > 1 or agg[x_col].dt.minute.nunique() > 1
+                        
+                        for _, row in agg.iterrows():
+                            val = row[y_col]
+                            if pd.notna(val):
+                                # Dynamic formatting: Use time only if there is actual intra-day variation
+                                if time_delta.days > 365:
+                                    date_str = row[x_col].strftime('%Y-%m')
+                                elif time_delta.days >= 1:
+                                    date_str = row[x_col].strftime('%Y-%m-%d')
+                                elif has_time_variation:
+                                    date_str = row[x_col].strftime('%H:%M')
+                                else:
+                                    # Single day or no time variation -> Show full date
+                                    date_str = row[x_col].strftime('%Y-%m-%d')
+                                    
+                                chart_data.append({"name": date_str, "value": float(val)})
+                    except Exception as line_err:
+                        print(f"Line chart aggregation error: {line_err}")
             else:
+                # Not a date column, use as categoric/numeric sequence
                 try:
                     agg = temp_df.groupby(x_col)[y_col].mean().reset_index()
-                    agg = agg.sort_values(x_col)
-                    # Sample for performance if too many points
-                    if len(agg) > 100:
-                        agg = agg.iloc[::len(agg)//100]
+                    # If it looks numeric, sort it as numeric
+                    try:
+                        agg[x_col] = pd.to_numeric(agg[x_col])
+                        agg = agg.sort_values(x_col)
+                    except:
+                        agg = agg.sort_values(y_col, ascending=False).head(50)
+                    
                     for _, row in agg.iterrows():
-                        try:
-                            date_str = str(row[x_col].date())
-                        except:
-                            date_str = str(row[x_col])
-                        chart_data.append({"name": date_str, "value": float(row[y_col])})
+                        val = row[y_col]
+                        if pd.notna(val):
+                            chart_data.append({"name": str(row[x_col]), "value": float(val)})
                 except Exception as line_err:
-                    print(f"Line chart aggregation error: {line_err}")
+                    print(f"Generic line chart error: {line_err}")
 
         elif chart_type == "scatter":
             x_col = chart.get("x_axis")
@@ -165,8 +208,22 @@ def generate_chart_data(df, chart, stats):
             data = pd.to_numeric(df[col], errors='coerce').dropna()
             if len(data) > 0:
                 counts, bins = np.histogram(data, bins=10)
+                # Check if int casting would cause duplicates
+                use_integers = True
+                for b in bins:
+                    if b != int(b):
+                        use_integers = False
+                        break
+                
+                # If the range is small (e.g. max - min < 10), ints will definitely repeat
+                if (bins[-1] - bins[0]) < 10:
+                    use_integers = False
+
                 for i in range(len(counts)):
-                    label = f"{bins[i]:.1f}"
+                    if use_integers:
+                        label = f"{int(bins[i])} - {int(bins[i+1])}"
+                    else:
+                        label = f"{bins[i]:.1f} - {bins[i+1]:.1f}"
                     chart_data.append({"name": label, "value": int(counts[i])})
 
         elif chart_type == "heatmap":
@@ -198,7 +255,7 @@ def generate_chart_data(df, chart, stats):
                     temp_df = temp_df.dropna(subset=[color_col])
                     
                     # Aggregate by location (sum or mean)
-                    agg = temp_df.groupby(loc_col)[color_col].sum().reset_index().head(100)
+                    agg = temp_df.groupby(loc_col)[color_col].sum().reset_index()
                     for _, row in agg.iterrows():
                         val = row[color_col]
                         if isinstance(val, (pd.Series, np.ndarray)): val = val[0]
@@ -216,7 +273,7 @@ def generate_chart_data(df, chart, stats):
                     temp_df[lat_col] = pd.to_numeric(temp_df[lat_col], errors='coerce')
                     temp_df[lon_col] = pd.to_numeric(temp_df[lon_col], errors='coerce')
                     temp_df[color_col] = pd.to_numeric(temp_df[color_col], errors='coerce')
-                    temp_df = temp_df.dropna().head(1000)
+                    temp_df = temp_df.dropna()
                     for _, row in temp_df.iterrows():
                         chart_data.append({
                             "lat": float(row[lat_col]),
@@ -231,7 +288,7 @@ def generate_chart_data(df, chart, stats):
                     temp_df = df[[lat_col, lon_col, cat_col]].copy()
                     temp_df[lat_col] = pd.to_numeric(temp_df[lat_col], errors='coerce')
                     temp_df[lon_col] = pd.to_numeric(temp_df[lon_col], errors='coerce')
-                    temp_df = temp_df.dropna().head(1000)
+                    temp_df = temp_df.dropna()
                     for _, row in temp_df.iterrows():
                         chart_data.append({
                             "lat": float(row[lat_col]),

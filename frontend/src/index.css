@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
+:root {
+  --polymer-bg: #F8F9FA;
+  --polymer-card-bg: #FFFFFF;
+  --polymer-text-primary: #1A1D1F;
+  --polymer-text-secondary: #6F767E;
+  --polymer-border: #EFEFEF;
+  --polymer-accent-yellow: #FFD339;
+  --polymer-accent-orange: #FF922B;
+  --polymer-accent-green: #37D67A;
+  --polymer-accent-pink: #FF61D2;
+  --polymer-accent-cyan: #00D1FF;
+  --polymer-radius: 12px;
+}
+
+
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -27,6 +44,35 @@
   .text-glow {
     text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
   }
+
+  .polymer-card {
+    @apply transition-all duration-300;
+    background-color: var(--polymer-card-bg);
+    border: 1px solid var(--polymer-border);
+    border-radius: var(--polymer-radius);
+    padding: 24px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+
+  .polymer-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  }
+
+  .polymer-text-primary {
+    color: var(--polymer-text-primary);
+  }
+
+  .polymer-text-secondary {
+    color: var(--polymer-text-secondary);
+  }
+
+  .polymer-accent-yellow { background-color: var(--polymer-accent-yellow); }
+  .polymer-accent-orange { background-color: var(--polymer-accent-orange); }
+  .polymer-accent-green { background-color: var(--polymer-accent-green); }
+  .polymer-accent-pink { background-color: var(--polymer-accent-pink); }
+  .polymer-accent-cyan { background-color: var(--polymer-accent-cyan); }
+
+
 
   .animate-float {
     animation: float 6s ease-in-out infinite;
