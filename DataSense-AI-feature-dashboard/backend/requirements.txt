@@ -1,0 +1,8 @@
+# DataSense-AI Analytical Engine Requirements
+requests
+fastapi
+uvicorn
+pandas
+numpy
+python-multipart
+scikit-learn
